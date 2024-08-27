@@ -1,5 +1,6 @@
 import 'package:expense_tracker_mobile/res/routes.dart';
-import 'package:expense_tracker_mobile/views/home/home.dart';
+import 'package:expense_tracker_mobile/screens/onboarding/onboarding.dart';
+// import 'package:expense_tracker_mobile/views/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/route_manager.dart';
@@ -23,11 +24,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       getPages: AppRoutes.appRoutes(),
       title: 'FinTracker',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const OnBoardingScreen(),
     );
   }
 }
