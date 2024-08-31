@@ -1,10 +1,10 @@
 import 'package:expense_tracker_mobile/common/styles/spacing_styles.dart';
-import 'package:expense_tracker_mobile/screens/onboarding/login/widgets/TLoginForm.dart';
-import 'package:expense_tracker_mobile/screens/onboarding/login/widgets/TLoginHeader.dart';
+import 'package:expense_tracker_mobile/screens/onboarding/register/widgets/TRegisterForm.dart';
+import 'package:expense_tracker_mobile/screens/onboarding/register/widgets/TRegisterHeader.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +13,7 @@ class LoginScreen extends StatelessWidget {
         child: Padding(
           padding: TSpacingStyle.paddingWithAppBarHeight,
           child: Column(
-            children: [
-              const TLoginHeader(),
-              TLoginForm(),
-            ],
+            children: [const TRegisterHeader(), TRegisterForm()],
           ),
         ),
       ),

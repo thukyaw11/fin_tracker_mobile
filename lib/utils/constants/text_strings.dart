@@ -4,10 +4,14 @@ class TTexts {
   static const String loginTitle = "Login";
   static const String email = "E-mail";
   static const String password = "Password";
+  static const String name = "Name";
   static const String rememberMe = "Remember Me";
   static const String forgetPassword = "Forget Password";
   static const String signIn = "Sign In";
   static const String createAccount = "Create Account";
+
+  // Register Texts
+  static const String registerTitle = "Register";
 
   // -- OnBoarding Texts
   static const String onBoardingTitle1 = "Gain total control of your money";

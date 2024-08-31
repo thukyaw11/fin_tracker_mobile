@@ -1,4 +1,5 @@
-import 'package:expense_tracker_mobile/controllers/auth/login_controller.dart';
+import 'package:expense_tracker_mobile/controllers/auth/register_controller.dart';
+import 'package:expense_tracker_mobile/screens/onboarding/login/login.dart';
 import 'package:expense_tracker_mobile/screens/onboarding/register/register.dart';
 import 'package:expense_tracker_mobile/utils/constants/sizes.dart';
 import 'package:expense_tracker_mobile/utils/constants/text_strings.dart';
@@ -6,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
-class TLoginForm extends StatelessWidget {
-  TLoginForm({
+class TRegisterForm extends StatelessWidget {
+  TRegisterForm({
     super.key,
   });
 
-  final LoginController controller = Get.put(LoginController());
+  final RegisterController controller = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,10 @@ class TLoginForm extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
         child: Column(
           children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                  prefixIcon: Icon(Iconsax.user), labelText: TTexts.name),
+            ),
             //Email
             TextFormField(
               decoration: const InputDecoration(
@@ -50,31 +55,11 @@ class TLoginForm extends StatelessWidget {
               height: TSizes.spaceBtwInputField / 2,
             ),
 
-            //Remember Me & Forget Password
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                //Remember Me
-                Row(
-                  children: [
-                    Checkbox(value: true, onChanged: (value) {}),
-                    const Text(TTexts.rememberMe),
-                  ],
-                ),
-
-                //Forget Password
-                TextButton(
-                    onPressed: () {}, child: const Text(TTexts.forgetPassword)),
-              ],
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
             //Sign In Button
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text(TTexts.signIn))),
+                    onPressed: () {}, child: const Text(TTexts.createAccount))),
             const SizedBox(height: TSizes.spaceBtwItems),
 
             //Create Account Button
@@ -83,9 +68,9 @@ class TLoginForm extends StatelessWidget {
                 child: OutlinedButton(
                     onPressed: () {
                       // Navigate to the Sign Up page
-                      Get.to(() => const RegisterScreen());
+                      Get.to(() => const LoginScreen());
                     },
-                    child: const Text(TTexts.createAccount))),
+                    child: const Text(TTexts.signIn))),
             const SizedBox(height: TSizes.spaceBtwSections),
           ],
         ),

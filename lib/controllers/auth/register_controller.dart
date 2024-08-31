@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
+class RegisterController extends GetxController {
   var obscureText = true.obs;
 
   void togglePasswordVisibility() {

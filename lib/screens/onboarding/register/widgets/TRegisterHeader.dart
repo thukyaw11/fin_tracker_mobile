@@ -2,8 +2,8 @@ import 'package:expense_tracker_mobile/utils/constants/image_strings.dart';
 import 'package:expense_tracker_mobile/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 
-class TLoginHeader extends StatelessWidget {
-  const TLoginHeader({
+class TRegisterHeader extends StatelessWidget {
+  const TRegisterHeader({
     super.key,
   });
 
@@ -16,7 +16,7 @@ class TLoginHeader extends StatelessWidget {
           height: 100,
           image: AssetImage(TImages.logo),
         ),
-        Text(TTexts.loginTitle,
+        Text(TTexts.registerTitle,
             style: Theme.of(context).textTheme.headlineMedium),
       ],
     );
