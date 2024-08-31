@@ -1,5 +1,14 @@
 // This class contains all the App Text in String Formats
 class TTexts {
+  // Login Texts
+  static const String loginTitle = "Login";
+  static const String email = "E-mail";
+  static const String password = "Password";
+  static const String rememberMe = "Remember Me";
+  static const String forgetPassword = "Forget Password";
+  static const String signIn = "Sign In";
+  static const String createAccount = "Create Account";
+
   // -- OnBoarding Texts
   static const String onBoardingTitle1 = "Gain total control of your money";
   static const String onBoardingTitle2 = "Know where your money goes";
