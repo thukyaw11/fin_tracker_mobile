@@ -70,11 +70,27 @@ class TLoginForm extends StatelessWidget {
             const SizedBox(
               height: 16.0,
             ),
-            //Sign In Button
+            // Sign In Button
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () {}, child: const Text(TTexts.signIn))),
+            // ElevatedButton(
+            //   onPressed: () {},
+            //   style: ElevatedButton.styleFrom(
+            //     padding: const EdgeInsets.all(16),
+            //     foregroundColor: Colors.deepPurple,
+            //     backgroundColor: Colors.white,
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(12),
+            //     ),
+            //   ),
+            //   child: const Text(
+            //     TTexts.signIn,
+            //     style: TextStyle(fontSize: 18, color: Colors.deepPurple),
+            //   ),
+            // ),
+
             const SizedBox(height: TSizes.spaceBtwItems),
 
             //Create Account Button
