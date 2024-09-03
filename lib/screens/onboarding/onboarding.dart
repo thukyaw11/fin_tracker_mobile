@@ -30,19 +30,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 controller: _pageController,
                 children: [
                   OnBoardingPage(
-                    image: TImages.OnBoardingImage1,
+                    image: TImages.onBoardingImage1,
                     title: TTexts.onBoardingTitle1,
                     subTitle: TTexts.onBoardingSubTitle1,
                     pageController: _pageController,
                   ),
                   OnBoardingPage(
-                    image: TImages.OnBoardingImage2,
+                    image: TImages.onBoardingImage2,
                     title: TTexts.onBoardingTitle2,
                     subTitle: TTexts.onBoardingSubTitle2,
                     pageController: _pageController,
                   ),
                   OnBoardingPage(
-                    image: TImages.OnBoardingImage3,
+                    image: TImages.onBoardingImage3,
                     title: TTexts.onBoardingTitle3,
                     subTitle: TTexts.onBoardingSubTitle3,
                     pageController: _pageController,
@@ -57,8 +57,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 // Navigate to the Register screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const RegisterScreen()),
+                  MaterialPageRoute(builder: (context) => RegisterScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(

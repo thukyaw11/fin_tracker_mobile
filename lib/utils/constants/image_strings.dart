@@ -4,9 +4,9 @@ class TImages {
   static const String logo = "assets/images/splash/FinTrack_Logo.png";
 
 // -- OnBorading Images
-  static const String OnBoardingImage1 =
+  static const String onBoardingImage1 =
       "assets/images/on_boarding/control.png";
-  static const String OnBoardingImage2 =
+  static const String onBoardingImage2 =
       "assets/images/on_boarding/money_go.png";
-  static const String OnBoardingImage3 = "assets/images/on_boarding/plan.png";
+  static const String onBoardingImage3 = "assets/images/on_boarding/plan.png";
 }

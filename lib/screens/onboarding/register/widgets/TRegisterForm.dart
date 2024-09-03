@@ -22,11 +22,13 @@ class TRegisterForm extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              controller: controller.nameController,
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.user), labelText: TTexts.name),
             ),
             //Email
             TextFormField(
+              controller: controller.emailController,
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.direct_right),
                   labelText: TTexts.email),
@@ -37,6 +39,7 @@ class TRegisterForm extends StatelessWidget {
 
             //Password
             Obx(() => TextFormField(
+                  controller: controller.passwordController,
                   obscureText: controller.obscureText.value,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Iconsax.password_check),
@@ -59,7 +62,8 @@ class TRegisterForm extends StatelessWidget {
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text(TTexts.createAccount))),
+                    onPressed: controller.register,
+                    child: const Text(TTexts.createAccount))),
             const SizedBox(height: TSizes.spaceBtwItems),
 
             //Create Account Button
