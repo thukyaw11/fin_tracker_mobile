@@ -27,6 +27,6 @@ class RegisterController extends GetxController {
       password: password,
     );
 
-    Get.to(() => const LoginScreen());
+    Get.to(() => LoginScreen());
   }
 }

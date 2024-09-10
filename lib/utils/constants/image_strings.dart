@@ -5,8 +5,9 @@ class TImages {
 
 // -- OnBorading Images
   static const String onBoardingImage1 =
-      "assets/images/on_boarding/control.png";
+      "assets/images/on_boarding/on_boarding_1.png";
   static const String onBoardingImage2 =
-      "assets/images/on_boarding/money_go.png";
-  static const String onBoardingImage3 = "assets/images/on_boarding/plan.png";
+      "assets/images/on_boarding/on_boarding_2.png";
+  static const String onBoardingImage3 =
+      "assets/images/on_boarding/on_boarding_3.png";
 }

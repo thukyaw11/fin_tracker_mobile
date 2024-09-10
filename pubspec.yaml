@@ -41,6 +41,7 @@ dependencies:
   http: ^1.0.0
   fluttertoast: ^8.2.8
   get:
+  flutter_secure_storage: ^9.2.2
 
 dev_dependencies:
   flutter_test:
@@ -69,7 +70,12 @@ flutter:
     - assets/images/
     - assets/images/on_boarding/
     - assets/images/splash/
-
+  fonts:
+      - family: Poppins
+        fonts:
+          - asset: assets/fonts/Poppins-Regular.ttf
+          - asset: assets/fonts/Poppins-Bold.ttf
+            weight: 700
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

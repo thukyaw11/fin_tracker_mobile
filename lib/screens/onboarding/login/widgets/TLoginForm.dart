@@ -1,5 +1,6 @@
 import 'package:expense_tracker_mobile/controllers/auth/login_controller.dart';
 import 'package:expense_tracker_mobile/screens/onboarding/register/register.dart';
+import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:expense_tracker_mobile/utils/constants/sizes.dart';
 import 'package:expense_tracker_mobile/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
@@ -22,20 +23,40 @@ class TLoginForm extends StatelessWidget {
           children: [
             //Email
             TextFormField(
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Iconsax.direct_right),
-                  labelText: TTexts.email),
+              controller: controller.emailController,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Iconsax.direct_right),
+                labelText: 'Email', // Replace TTexts.email with your text
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(
+                      color: AppColors.primaryColor, width: 2.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(
+                      color: AppColors.accentColor, width: 1.0),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 20.0),
+              ),
             ),
+
             const SizedBox(
               height: TSizes.spaceBtwInputField,
             ),
 
             //Password
             Obx(() => TextFormField(
+                  controller: controller.passwordController,
                   obscureText: controller.obscureText.value,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Iconsax.password_check),
-                    labelText: TTexts.password,
+                    labelText:
+                        'Password', // Replace TTexts.password with your text
                     suffixIcon: IconButton(
                       icon: Icon(
                         controller.obscureText.value
@@ -44,6 +65,21 @@ class TLoginForm extends StatelessWidget {
                       ),
                       onPressed: controller.togglePasswordVisibility,
                     ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                      borderSide: const BorderSide(
+                          color: AppColors.primaryColor, width: 2.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                      borderSide: const BorderSide(
+                          color: AppColors.accentColor, width: 1.0),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 20.0),
                   ),
                 )),
             const SizedBox(
@@ -64,7 +100,8 @@ class TLoginForm extends StatelessWidget {
 
                 //Forget Password
                 TextButton(
-                    onPressed: () {}, child: const Text(TTexts.forgetPassword)),
+                    onPressed: () => {},
+                    child: const Text(TTexts.forgetPassword)),
               ],
             ),
             const SizedBox(
@@ -72,37 +109,56 @@ class TLoginForm extends StatelessWidget {
             ),
             // Sign In Button
             SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                    onPressed: () {}, child: const Text(TTexts.signIn))),
-            // ElevatedButton(
-            //   onPressed: () {},
-            //   style: ElevatedButton.styleFrom(
-            //     padding: const EdgeInsets.all(16),
-            //     foregroundColor: Colors.deepPurple,
-            //     backgroundColor: Colors.white,
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(12),
-            //     ),
-            //   ),
-            //   child: const Text(
-            //     TTexts.signIn,
-            //     style: TextStyle(fontSize: 18, color: Colors.deepPurple),
-            //   ),
-            // ),
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: controller.login,
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  padding: const EdgeInsets.all(16),
+                  foregroundColor: AppColors.primaryColor,
+                  backgroundColor: AppColors.accentColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text(
+                  'Login',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: AppColors.primaryColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
 
             const SizedBox(height: TSizes.spaceBtwItems),
 
             //Create Account Button
-            SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                    onPressed: () {
-                      // Navigate to the Sign Up page
-                      Get.to(() => RegisterScreen());
-                    },
-                    child: const Text(TTexts.createAccount))),
-            const SizedBox(height: TSizes.spaceBtwSections),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Don\'t have an account? ',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => RegisterScreen());
+                  },
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.primaryColor,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

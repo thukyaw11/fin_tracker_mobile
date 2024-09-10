@@ -72,7 +72,7 @@ class TRegisterForm extends StatelessWidget {
                 child: OutlinedButton(
                     onPressed: () {
                       // Navigate to the Sign Up page
-                      Get.to(() => const LoginScreen());
+                      Get.to(() => LoginScreen());
                     },
                     child: const Text(TTexts.signIn))),
             const SizedBox(height: TSizes.spaceBtwSections),

@@ -1,3 +1,4 @@
+import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:expense_tracker_mobile/utils/constants/image_strings.dart';
 import 'package:expense_tracker_mobile/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
@@ -62,14 +63,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.all(16),
-                backgroundColor: Colors.deepPurple,
+                backgroundColor: AppColors.primaryColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
               child: const Text(
                 'Sign Up',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 16),
@@ -80,42 +84,26 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 // Navigate to the Login screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
+                elevation: 0,
                 padding: const EdgeInsets.all(16),
-                foregroundColor: Colors.deepPurple,
-                backgroundColor: Colors.white,
+                foregroundColor: AppColors.primaryColor,
+                backgroundColor: AppColors.accentColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
               child: const Text(
                 'Login',
-                style: TextStyle(fontSize: 18, color: Colors.deepPurple),
+                style: TextStyle(
+                    fontSize: 18,
+                    color: AppColors.primaryColor,
+                    fontWeight: FontWeight.bold),
               ),
             ),
-            // TextButton(
-            //   onPressed: () {
-            //     // Navigate to the Login screen
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => const LoginScreen()),
-            //     );
-            //   },
-            //   style: TextButton.styleFrom(
-            //     padding: const EdgeInsets.all(16),
-            //     foregroundColor: Colors.deepPurple,
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(12),
-            //     ),
-            //   ),
-            //   child: const Text(
-            //     'Login',
-            //     style: TextStyle(fontSize: 18),
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -150,7 +138,7 @@ class OnBoardingPage extends StatelessWidget {
         Text(
           title,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
