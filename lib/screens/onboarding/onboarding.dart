@@ -78,10 +78,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
             const SizedBox(height: 16),
 
-            // Login Button
             ElevatedButton(
               onPressed: () {
-                // Navigate to the Login screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => LoginScreen()),

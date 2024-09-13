@@ -4,9 +4,6 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
-const storage = FlutterSecureStorage();
 
 class ApiService extends GetxService {
   Future<void> registerUser({
@@ -49,7 +46,7 @@ class ApiService extends GetxService {
     }
   }
 
-  Future<void> loginUser({
+  Future<String?> loginUser({
     required String email,
     required String password,
   }) async {
@@ -64,14 +61,10 @@ class ApiService extends GetxService {
       final response = await http.post(loginUrl, headers: headers, body: body);
 
       if (response.statusCode == 200) {
-        // Decode the response body
         final responseData = jsonDecode(response.body);
 
-        // Access the token
         final token = responseData['_data']['token'];
-        print('Login Successful, Token: $token');
-
-        await storage.write(key: 'auth_token', value: token);
+        return token;
       } else {
         print('Login failed with status code: ${response.statusCode}');
       }

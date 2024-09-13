@@ -1,32 +1,43 @@
+import 'package:expense_tracker_mobile/controllers/navigation/navigation_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final NavigationController navController = Get.put(NavigationController());
+
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.purple,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.track_changes),
-            label: 'Tracker',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.flag),
-            label: 'Goal',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
+      bottomNavigationBar: Obx(
+        () => SalomonBottomBar(
+          currentIndex: navController.currentIndex.value,
+          onTap: (i) => navController.changeIndex(i),
+          items: [
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.home),
+              title: const Text("Home"),
+              selectedColor: Colors.purple,
+            ),
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.favorite_border),
+              title: const Text("Likes"),
+              selectedColor: Colors.pink,
+            ),
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.search),
+              title: const Text("Search"),
+              selectedColor: Colors.orange,
+            ),
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.person),
+              title: const Text("Profile"),
+              selectedColor: Colors.teal,
+            ),
+          ],
+        ),
       ),
       body: SafeArea(
         child: Padding(

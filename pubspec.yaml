@@ -41,7 +41,8 @@ dependencies:
   http: ^1.0.0
   fluttertoast: ^8.2.8
   get:
-  flutter_secure_storage: ^9.2.2
+  salomon_bottom_bar: ^3.3.2
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
