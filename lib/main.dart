@@ -1,10 +1,14 @@
 import 'package:expense_tracker_mobile/res/routes.dart';
 import 'package:expense_tracker_mobile/screens/onboarding/onboarding.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
+import 'package:expense_tracker_mobile/utils/services/api_services.dart';
+import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
 // import 'package:expense_tracker_mobile/views/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
+
+import 'screens/main/main_page.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +26,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      getPages: AppRoutes.appRoutes(),
       title: 'FinTracker',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -42,7 +45,50 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
         useMaterial3: true,
       ),
-      home: const OnBoardingScreen(),
+      home: const AuthChecker(),
+    );
+  }
+}
+
+class AuthChecker extends StatefulWidget {
+  const AuthChecker({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _AuthCheckerState createState() => _AuthCheckerState();
+}
+
+class _AuthCheckerState extends State<AuthChecker> {
+  @override
+  void initState() {
+    super.initState();
+    _checkAuthentication();
+  }
+
+  void _checkAuthentication() async {
+    String? token = await SharedPreferenceService.getAccessToken();
+    Get.lazyPut(() => ApiService());
+
+    final ApiService apiService = Get.find<ApiService>();
+
+    if (token != null) {
+      bool isValid = await apiService.validateAuth(token: token);
+
+      if (isValid) {
+        Get.offAll(() => const HomePage());
+      } else {
+        await SharedPreferenceService.removeAccessToken();
+        Get.offAll(() => const OnBoardingScreen());
+      }
+    } else {
+      Get.offAll(() => const OnBoardingScreen());
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(child: CircularProgressIndicator()),
     );
   }
 }

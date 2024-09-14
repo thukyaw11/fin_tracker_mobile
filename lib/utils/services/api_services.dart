@@ -42,7 +42,6 @@ class ApiService extends GetxService {
       }
     } catch (e) {
       // Exception handling
-      print('Error occurred: $e');
     }
   }
 
@@ -67,9 +66,31 @@ class ApiService extends GetxService {
         return token;
       } else {
         print('Login failed with status code: ${response.statusCode}');
+        return null;
       }
     } catch (e) {
-      print('Error occurred: $e');
+      return null;
+    }
+  }
+
+  Future<bool> validateAuth({
+    required String token,
+  }) async {
+    final validateUrl = Uri.parse('${ApiConstants.url}/auth/me');
+    final headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+
+    try {
+      final responseData = await http.get(validateUrl, headers: headers);
+      if (responseData.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
     }
   }
 }

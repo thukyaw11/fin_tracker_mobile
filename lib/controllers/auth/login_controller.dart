@@ -1,4 +1,4 @@
-import 'package:expense_tracker_mobile/screens/main/home_page.dart';
+import 'package:expense_tracker_mobile/screens/main/main_page.dart';
 import 'package:expense_tracker_mobile/utils/services/api_services.dart';
 import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
 import 'package:flutter/material.dart';
