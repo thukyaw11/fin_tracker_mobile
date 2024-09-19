@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           labelMedium: TextStyle(fontFamily: 'Poppins'),
           labelSmall: TextStyle(fontFamily: 'Poppins'),
         ),
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.accentColor),
         useMaterial3: true,
       ),
       home: const AuthChecker(),
