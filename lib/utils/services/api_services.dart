@@ -56,6 +56,8 @@ class ApiService extends GetxService {
       'password': password,
     });
 
+    print(body);
+
     try {
       final response = await http.post(loginUrl, headers: headers, body: body);
 
@@ -69,6 +71,7 @@ class ApiService extends GetxService {
         return null;
       }
     } catch (e) {
+      print(e);
       return null;
     }
   }

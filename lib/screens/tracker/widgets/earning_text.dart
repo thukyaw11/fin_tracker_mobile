@@ -25,7 +25,7 @@ class EarningText extends StatelessWidget {
             color: fontColor,
           ),
         ),
-        const SizedBox(height: 8), // Add spacing between text and amount
+        const SizedBox(height: 8),
         Text(
           '${amount.toStringAsFixed(0)} KS',
           style: const TextStyle(
