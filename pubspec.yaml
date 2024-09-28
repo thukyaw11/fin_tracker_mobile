@@ -43,6 +43,9 @@ dependencies:
   get:
   salomon_bottom_bar: ^3.3.2
   shared_preferences: ^2.3.2
+  pull_to_refresh_flutter3: ^2.0.2
+
+    
 
 dev_dependencies:
   flutter_test:

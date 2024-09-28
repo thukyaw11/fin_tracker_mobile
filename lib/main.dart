@@ -1,4 +1,3 @@
-import 'package:expense_tracker_mobile/res/routes.dart';
 import 'package:expense_tracker_mobile/screens/onboarding/onboarding.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:expense_tracker_mobile/utils/services/api_services.dart';
@@ -29,6 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'FinTracker',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(elevation: 0),
         textTheme: const TextTheme(
           bodyLarge: TextStyle(fontFamily: 'Poppins'),
           bodyMedium: TextStyle(fontFamily: 'Poppins'),
@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
           labelMedium: TextStyle(fontFamily: 'Poppins'),
           labelSmall: TextStyle(fontFamily: 'Poppins'),
         ),
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.accentColor),
         useMaterial3: true,
       ),
       home: const AuthChecker(),

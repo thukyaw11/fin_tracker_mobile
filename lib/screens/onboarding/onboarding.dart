@@ -158,7 +158,7 @@ class OnBoardingPage extends StatelessWidget {
         SmoothPageIndicator(
           controller: pageController,
           count: 3,
-          effect: ExpandingDotsEffect(
+          effect: const ExpandingDotsEffect(
             activeDotColor: Colors.deepPurple,
             dotHeight: 8,
             dotWidth: 8,

@@ -15,9 +15,9 @@ class TrackerController extends GetxController {
 
   Future<void> fetchWallets() async {
     try {
-      List walletList = await apiService.getAllWallets();
-
-      wallets.value = walletList.cast<Map<String, dynamic>>();
+      Iterable<Map<String, dynamic>> walletList =
+          await apiService.getAllWallets();
+      wallets.assignAll(walletList);
     } catch (e) {
       print('Failed to fetch wallets: $e');
     }

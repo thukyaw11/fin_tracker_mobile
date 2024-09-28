@@ -5,16 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:expense_tracker_mobile/utils/constants/api_constants.dart';
 
 class TrackerApiService extends GetxService {
-  Future<List> getAllWallets() async {
-    List wallets = [];
+  Future<List<Map<String, dynamic>>> getAllWallets() async {
+    List<Map<String, dynamic>> wallets = [];
     String? token = await SharedPreferenceService.getAccessToken();
-    if (token != null) {
-      print('Access Token: $token');
-      // Use the token for API calls or other logic
-    } else {
-      print('No access token found.');
-      // Handle the case where the token is null
-    }
+
     final walletUrl = Uri.parse('${ApiConstants.url}/wallet');
     final headers = {
       'Content-Type': 'application/json',
@@ -27,17 +21,15 @@ class TrackerApiService extends GetxService {
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
 
-        wallets = responseData['_data']['data'];
+        wallets =
+            List<Map<String, dynamic>>.from(responseData['_data']['data']);
       } else {
-        // Handle error responses
         print('Failed to load wallets: ${response.statusCode}');
       }
     } catch (e) {
-      // Handle any errors that occurred during the request
       print('Error fetching wallets: $e');
     }
 
-    // Return the list of wallets
     return wallets;
   }
 }
