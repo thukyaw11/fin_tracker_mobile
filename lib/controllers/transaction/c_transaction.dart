@@ -1,9 +1,14 @@
+import 'package:expense_tracker_mobile/controllers/group/c_group.dart';
+import 'package:expense_tracker_mobile/models/m_transaction_record.dart';
+import 'package:expense_tracker_mobile/utils/services/transaction/api.transaction.services.dart';
 import 'package:get/get.dart';
 
 class TransactionController extends GetxController {
-  // final TrackerApiService apiService = Get.put(TrackerApiService());
+  final TransactionApiService apiService = Get.put(TransactionApiService());
+  final GroupController groupController = Get.find<GroupController>();
 
-  var transactionRecords = <Translations>[].obs;
+  var transactionRecords = <Transaction>[].obs;
+  var isLoading = true.obs;
 
   @override
   void onInit() {
@@ -13,10 +18,14 @@ class TransactionController extends GetxController {
 
   Future<void> fetchTransactions() async {
     try {
-      print(" it works");
-      // wallets.assignAll(walletList);
+      isLoading.value = true;
+      var groupId = groupController.selectedGroupName.value;
+      final fetchedTransactions = await apiService.getAllTransactions();
+      transactionRecords.assignAll(fetchedTransactions);
     } catch (e) {
       rethrow;
+    } finally {
+      isLoading.value = false;
     }
   }
 }

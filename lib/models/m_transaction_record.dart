@@ -1,11 +1,11 @@
 class Transaction {
-  String id;
-  int amount;
-  String type;
-  CashCategory cashCategory;
-  String title;
-  String description;
-  DateTime createdAt;
+  final String id;
+  final int? amount;
+  final String type;
+  final CashCategory cashCategory;
+  final String title;
+  final String description;
+  final DateTime createdAt;
 
   Transaction({
     required this.id,
@@ -20,7 +20,7 @@ class Transaction {
   factory Transaction.fromJson(Map<String, dynamic> json) {
     return Transaction(
       id: json['id'],
-      amount: json['amount'],
+      amount: json['amount'] ?? 0,
       type: json['type'],
       cashCategory: CashCategory.fromJson(json['cashCategory']),
       title: json['title'],
@@ -29,16 +29,11 @@ class Transaction {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'amount': amount,
-      'type': type,
-      'cashCategory': cashCategory.toJson(),
-      'title': title,
-      'description': description,
-      'createdAt': createdAt.toIso8601String(),
-    };
+  static List<Transaction> fromJsonList(List<dynamic> jsonList) {
+    // loop the jsonList
+    return jsonList.map((json) {
+      return Transaction.fromJson(json);
+    }).toList();
   }
 }
 

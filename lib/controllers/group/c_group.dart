@@ -7,6 +7,7 @@ class GroupController extends GetxController {
 
   var groups = <Group>[].obs;
   var selectedGroupName = 'Personal'.obs;
+  var selectedGroupId = ''.obs;
   var isLoading = true.obs;
 
   Future<void> getAllGroups() async {
@@ -16,9 +17,12 @@ class GroupController extends GetxController {
       groups.assignAll(fetchedGroups);
       if (groups.isNotEmpty) {
         selectedGroupName.value = groups[0].name;
+        selectedGroupId.value = groups[0].id;
+        print(selectedGroupId.value);
+        print('heeh');
       }
     } catch (e) {
-      print('Error fetching groups: $e');
+      rethrow;
     } finally {
       isLoading.value = false;
     }

@@ -22,40 +22,38 @@ class HomePage extends StatelessWidget {
     ];
 
     return Scaffold(
-      bottomNavigationBar: Obx(
-        () => SalomonBottomBar(
-          currentIndex: navController.currentIndex.value,
-          onTap: (index) {
-            navController.changeIndex(index);
-          },
-          items: [
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.home),
-              title: const Text("Home"),
-              selectedColor: AppColors.primaryColor,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.track_changes_rounded),
-              title: const Text("Tracker"),
-              selectedColor: AppColors.primaryColor,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.golf_course_sharp),
-              title: const Text("Goal"),
-              selectedColor: AppColors.primaryColor,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.person),
-              title: const Text("Profile"),
-              selectedColor: AppColors.primaryColor,
-            ),
-          ],
+        bottomNavigationBar: Obx(
+          () => SalomonBottomBar(
+            currentIndex: navController.currentIndex.value,
+            onTap: (index) {
+              navController.changeIndex(index);
+            },
+            items: [
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.home),
+                title: const Text("Home"),
+                selectedColor: AppColors.primaryColor,
+              ),
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.track_changes_rounded),
+                title: const Text("Tracker"),
+                selectedColor: AppColors.primaryColor,
+              ),
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.golf_course_sharp),
+                title: const Text("Goal"),
+                selectedColor: AppColors.primaryColor,
+              ),
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.person),
+                title: const Text("Profile"),
+                selectedColor: AppColors.primaryColor,
+              ),
+            ],
+          ),
         ),
-      ),
-      body: Obx(
-        () => pages[
-            navController.currentIndex.value], // Directly switch between pages
-      ),
-    );
+        body: Obx(
+          () => pages[navController.currentIndex.value],
+        ));
   }
 }

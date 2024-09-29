@@ -40,7 +40,7 @@ Widget buildTransactionItem(String title, String amount, String subtitle,
               amount,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: amount.contains('-') ? Colors.red : Colors.green,
+                color: iconColor,
               ),
             ),
             Text(
