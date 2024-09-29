@@ -1,11 +1,26 @@
+import 'package:expense_tracker_mobile/controllers/transaction/c_transaction.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_date_tabs.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_drop_down_button.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_income_expense_card.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_transaction_items.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key}) {
+    _initData();
+  }
+
+  Future<void> _initData() async {
+    await _transactionController.fetchTransactions();
+  }
+
+  final TransactionController _transactionController =
+      Get.put(TransactionController());
+
+  final List<String> dropdownItems = ["Personal", "Business", "Savings"];
+  var selectedItem = 'Personal'.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +43,30 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                buildDropdownButton('Personal'),
-                buildDropdownButton('October'),
+                Obx(() {
+                  return buildDropdownButton(
+                    title: selectedItem.value,
+                    items: dropdownItems,
+                    selectedItem: selectedItem.value,
+                    onChanged: (value) {
+                      if (value != null) {
+                        selectedItem.value = value;
+                      }
+                    },
+                  );
+                }),
+                Obx(() {
+                  return buildDropdownButton(
+                    title: selectedItem.value,
+                    items: dropdownItems,
+                    selectedItem: selectedItem.value,
+                    onChanged: (value) {
+                      if (value != null) {
+                        selectedItem.value = value;
+                      }
+                    },
+                  );
+                }),
               ],
             ),
             const SizedBox(height: 20),

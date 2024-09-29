@@ -1,4 +1,4 @@
-import 'package:expense_tracker_mobile/controllers/tracker/toggle_switch_controller.dart';
+import 'package:expense_tracker_mobile/controllers/tracker/c_toggle_switch.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

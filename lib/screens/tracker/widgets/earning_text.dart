@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class EarningText extends StatelessWidget {
   final String typeText;
   final Color fontColor;
-  final double amount;
+  final int amount;
 
   const EarningText({
     super.key,

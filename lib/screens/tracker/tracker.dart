@@ -1,30 +1,37 @@
-import 'package:expense_tracker_mobile/controllers/tracker/toggle_switch_controller.dart';
-import 'package:expense_tracker_mobile/controllers/tracker/wallet_controller.dart';
+import 'package:expense_tracker_mobile/controllers/group/c_group.dart';
+import 'package:expense_tracker_mobile/controllers/tracker/c_toggle_switch.dart';
+import 'package:expense_tracker_mobile/controllers/tracker/c_wallet.dart';
 import 'package:expense_tracker_mobile/screens/add_new_income/v_add_new_income.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_drop_down_button.dart';
 import 'package:expense_tracker_mobile/screens/tracker/widgets/earning_text.dart';
 import 'package:expense_tracker_mobile/screens/tracker/widgets/toggle_switch.dart';
 import 'package:expense_tracker_mobile/screens/tracker/widgets/wallet_card.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
-import 'package:expense_tracker_mobile/utils/services/tracker/api.tracker.services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class TrackerScreen extends StatelessWidget {
   TrackerScreen({super.key}) {
-    Get.lazyPut(() => TrackerApiService());
+    _initData();
+  }
+
+  Future<void> _initData() async {
+    await _trackerController.fetchWallets();
+    await _trackerController.fetchTrackerMoney();
+    await _groupController.getAllGroups();
   }
 
   final ToggleSwitchController controller = Get.put(ToggleSwitchController());
 
   final TrackerController _trackerController = Get.put(TrackerController());
+  final GroupController _groupController = Get.put(GroupController());
 
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
   void _onRefresh() async {
-    await _trackerController.fetchWallets();
+    _initData();
     _refreshController.refreshCompleted();
   }
 
@@ -65,7 +72,28 @@ class TrackerScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    buildDropdownButton('Personal'),
+                    Obx(() {
+                      if (_groupController.isLoading.value) {
+                        return const CircularProgressIndicator();
+                      }
+
+                      List<String> dropdownItems =
+                          _groupController.groups.map((gp) => gp.name).toList();
+
+                      final selectedItem =
+                          _groupController.selectedGroupName.value;
+
+                      return buildDropdownButton(
+                        title: selectedItem,
+                        items: dropdownItems,
+                        selectedItem: selectedItem,
+                        onChanged: (value) {
+                          if (value != null) {
+                            _groupController.selectedGroupName.value = value;
+                          }
+                        },
+                      );
+                    }),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -74,14 +102,16 @@ class TrackerScreen extends StatelessWidget {
                 Center(
                   child: Obx(() {
                     final isIncomeSelected = controller.isIncomeSelected.value;
-                    final textColor = isIncomeSelected
-                        ? Colors.green
-                        : Colors.red; // Dynamic color
+                    final textColor =
+                        isIncomeSelected ? Colors.green : Colors.red;
+                    final amount = isIncomeSelected
+                        ? _trackerController.totalIncome.value
+                        : _trackerController.totalExpense.value;
                     return EarningText(
                         typeText:
                             isIncomeSelected ? "You Earned 💰" : "You Spent 💸",
                         fontColor: textColor,
-                        amount: 3000);
+                        amount: amount);
                   }),
                 ),
                 const SizedBox(height: 40),

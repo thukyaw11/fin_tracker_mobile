@@ -1,8 +1,6 @@
 import 'package:expense_tracker_mobile/screens/onboarding/onboarding.dart';
-import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:expense_tracker_mobile/utils/services/api_services.dart';
 import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
-// import 'package:expense_tracker_mobile/views/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';

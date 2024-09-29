@@ -1,4 +1,4 @@
-import 'package:expense_tracker_mobile/controllers/navigation/navigation_controller.dart';
+import 'package:expense_tracker_mobile/controllers/navigation/c_navigation.dart';
 import 'package:expense_tracker_mobile/screens/home/home.dart';
 import 'package:expense_tracker_mobile/screens/profile/profile.dart';
 import 'package:expense_tracker_mobile/screens/tracker/tracker.dart';
@@ -15,9 +15,9 @@ class HomePage extends StatelessWidget {
     final NavigationController navController = Get.put(NavigationController());
 
     final List<Widget> pages = [
-      const HomeScreen(),
+      HomeScreen(),
       TrackerScreen(),
-      const HomeScreen(),
+      HomeScreen(),
       const ProfileScreen(),
     ];
 

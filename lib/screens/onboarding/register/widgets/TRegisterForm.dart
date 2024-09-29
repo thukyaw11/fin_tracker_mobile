@@ -1,4 +1,4 @@
-import 'package:expense_tracker_mobile/controllers/auth/register_controller.dart';
+import 'package:expense_tracker_mobile/controllers/auth/c_register.dart';
 import 'package:expense_tracker_mobile/screens/onboarding/login/login.dart';
 import 'package:expense_tracker_mobile/utils/constants/sizes.dart';
 import 'package:expense_tracker_mobile/utils/constants/text_strings.dart';
