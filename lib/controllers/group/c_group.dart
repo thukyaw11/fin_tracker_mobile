@@ -18,8 +18,6 @@ class GroupController extends GetxController {
       if (groups.isNotEmpty) {
         selectedGroupName.value = groups[0].name;
         selectedGroupId.value = groups[0].id;
-        print(selectedGroupId.value);
-        print('heeh');
       }
     } catch (e) {
       rethrow;

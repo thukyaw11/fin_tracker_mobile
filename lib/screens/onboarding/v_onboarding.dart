@@ -3,8 +3,8 @@ import 'package:expense_tracker_mobile/utils/constants/image_strings.dart';
 import 'package:expense_tracker_mobile/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'login/login.dart';
-import 'register/register.dart'; // Import the login screen
+import 'login/v_login.dart';
+import 'register/v_register.dart'; // Import the login screen
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});

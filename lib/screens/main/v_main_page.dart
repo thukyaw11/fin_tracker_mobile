@@ -1,7 +1,7 @@
 import 'package:expense_tracker_mobile/controllers/navigation/c_navigation.dart';
-import 'package:expense_tracker_mobile/screens/home/home.dart';
-import 'package:expense_tracker_mobile/screens/profile/profile.dart';
-import 'package:expense_tracker_mobile/screens/tracker/tracker.dart';
+import 'package:expense_tracker_mobile/screens/home/v_home.dart';
+import 'package:expense_tracker_mobile/screens/profile/v_profile.dart';
+import 'package:expense_tracker_mobile/screens/tracker/v_tracker.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

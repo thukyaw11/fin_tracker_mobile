@@ -1,4 +1,4 @@
-import 'package:expense_tracker_mobile/screens/onboarding/onboarding.dart';
+import 'package:expense_tracker_mobile/screens/onboarding/v_onboarding.dart';
 import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

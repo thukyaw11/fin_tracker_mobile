@@ -1,11 +1,12 @@
-import 'package:expense_tracker_mobile/screens/onboarding/onboarding.dart';
+import 'package:expense_tracker_mobile/screens/onboarding/v_onboarding.dart';
 import 'package:expense_tracker_mobile/utils/services/api_services.dart';
 import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
-import 'screens/main/main_page.dart';
+import 'controllers/group/c_group.dart';
+import 'screens/main/v_main_page.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,15 @@ class MyApp extends StatelessWidget {
       title: 'FinTracker',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(elevation: 0),
+        appBarTheme: const AppBarTheme(color: Colors.white,
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),),
         textTheme: const TextTheme(
           bodyLarge: TextStyle(fontFamily: 'Poppins'),
           bodyMedium: TextStyle(fontFamily: 'Poppins'),
@@ -40,7 +49,7 @@ class MyApp extends StatelessWidget {
           labelMedium: TextStyle(fontFamily: 'Poppins'),
           labelSmall: TextStyle(fontFamily: 'Poppins'),
         ),
-        useMaterial3: true,
+        useMaterial3: false,
       ),
       home: const AuthChecker(),
     );
@@ -65,6 +74,7 @@ class _AuthCheckerState extends State<AuthChecker> {
   void _checkAuthentication() async {
     String? token = await SharedPreferenceService.getAccessToken();
     Get.lazyPut(() => ApiService());
+    Get.lazyPut(() => GroupController());
 
     final ApiService apiService = Get.find<ApiService>();
 

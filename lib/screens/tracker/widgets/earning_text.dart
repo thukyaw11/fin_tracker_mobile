@@ -1,3 +1,4 @@
+import 'package:expense_tracker_mobile/utils/helpers/num_format.dart';
 import 'package:flutter/material.dart';
 
 class EarningText extends StatelessWidget {
@@ -27,7 +28,7 @@ class EarningText extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          '${amount.toStringAsFixed(0)} KS',
+          '${formatNumber(amount)} Ks',
           style: const TextStyle(
             fontSize: 28.0,
             fontWeight: FontWeight.w600,

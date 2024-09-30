@@ -76,7 +76,189 @@ class AddNewIncome extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16), // Add some spacing
+              const SizedBox(height: 16),
+              RichText(
+                text: const TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'Select Date',
+                        style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red), // Style for the 's'
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    labelText: 'Select Date ',
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              RichText(
+                text: const TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'Select Date',
+                        style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red), // Style for the 's'
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    labelText: 'Select Date ',
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              RichText(
+                text: const TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'Select Date',
+                        style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red), // Style for the 's'
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    labelText: 'Select Date ',
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              RichText(
+                text: const TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'Select Date',
+                        style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red), // Style for the 's'
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    labelText: 'Select Date ',
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              RichText(
+                text: const TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'Select Date',
+                        style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red), // Style for the 's'
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    labelText: 'Select Date ',
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              RichText(
+                text: const TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'Select Date',
+                        style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red), // Style for the 's'
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    labelText: 'Select Date ',
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              RichText(
+                text: const TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'Select Date',
+                        style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: Colors.red), // Style for the 's'
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    labelText: 'Select Date ',
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {},
                 child: const Text('Add TextField'),

@@ -5,13 +5,14 @@ import 'package:get/get.dart';
 
 class TransactionController extends GetxController {
   final TransactionApiService apiService = Get.put(TransactionApiService());
-  final GroupController groupController = Get.find<GroupController>();
+  final GroupController _groupController = Get.find();
 
   var transactionRecords = <Transaction>[].obs;
   var isLoading = true.obs;
 
   @override
   void onInit() {
+
     fetchTransactions();
     super.onInit();
   }
@@ -19,7 +20,7 @@ class TransactionController extends GetxController {
   Future<void> fetchTransactions() async {
     try {
       isLoading.value = true;
-      var groupId = groupController.selectedGroupName.value;
+      var groupId = _groupController.selectedGroupName.value;
       final fetchedTransactions = await apiService.getAllTransactions();
       transactionRecords.assignAll(fetchedTransactions);
     } catch (e) {

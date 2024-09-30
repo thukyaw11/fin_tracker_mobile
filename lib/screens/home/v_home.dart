@@ -4,6 +4,7 @@ import 'package:expense_tracker_mobile/screens/home/widgets/build_date_tabs.dart
 import 'package:expense_tracker_mobile/screens/home/widgets/build_drop_down_button.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_income_expense_card.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_transaction_items.dart';
+import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
 
   final TransactionController _transactionController =
       Get.put(TransactionController());
-  final GroupController _groupController = Get.put(GroupController());
+  final GroupController _groupController = Get.find();
 
   final List<String> dropdownItems = ["Personal", "Business", "Savings"];
   var selectedItem = 'Personal'.obs;
@@ -83,14 +84,39 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
+
+            Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  width: 7,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                const Column(
+                  children: [
+                    Text('Total Income', style: TextStyle(color: Colors.grey),),
+                    Text('530,000 Ks',  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),),
+
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 buildIncomeExpenseCard(
-                    'Income', '480,000 Ks', Colors.green, Icons.arrow_downward),
+                    'Net Amount', '480,000 Ks', Colors.green, '90 %', 0.9),
                 const SizedBox(width: 16),
                 buildIncomeExpenseCard(
-                    'Expenses', '50,000 Ks', Colors.red, Icons.arrow_upward),
+                    'Expenses', '50,000 Ks', Colors.red, '10 %', 0.1),
               ],
             ),
             const SizedBox(height: 20),
@@ -108,14 +134,14 @@ class HomeScreen extends StatelessWidget {
               if (_transactionController.isLoading.value) {
                 return const Center(child: CircularProgressIndicator());
               }
-              return SingleChildScrollView(
-                child: Column(
-                  children: _transactionController.transactionRecords
-                      .map((transaction) {
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: _transactionController.transactionRecords.length,
+                  itemBuilder: (context, index) {
+                    final transaction = _transactionController.transactionRecords[index];
                     DateTime adjustedTime = transaction.createdAt
                         .add(const Duration(hours: 6, minutes: 30));
-                    String formattedTime =
-                        DateFormat('h:mm a').format(adjustedTime);
+                    String formattedTime = DateFormat('h:mm a').format(adjustedTime);
 
                     return buildTransactionItem(
                       transaction.cashCategory.name,
@@ -125,9 +151,10 @@ class HomeScreen extends StatelessWidget {
                       transaction.type == "INCOME" ? Colors.green : Colors.red,
                       formattedTime,
                     );
-                  }).toList(),
+                  },
                 ),
               );
+
             }),
           ],
         ),

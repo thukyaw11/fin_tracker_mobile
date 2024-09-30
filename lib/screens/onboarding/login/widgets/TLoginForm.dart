@@ -1,5 +1,5 @@
 import 'package:expense_tracker_mobile/controllers/auth/c_login.dart';
-import 'package:expense_tracker_mobile/screens/onboarding/register/register.dart';
+import 'package:expense_tracker_mobile/screens/onboarding/register/v_register.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:expense_tracker_mobile/utils/constants/sizes.dart';
 import 'package:expense_tracker_mobile/utils/constants/text_strings.dart';
