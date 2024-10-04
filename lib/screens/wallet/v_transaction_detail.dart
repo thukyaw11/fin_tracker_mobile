@@ -237,8 +237,8 @@ class TransactionDetailsPage extends StatelessWidget {
                         height: 120,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            'assets/images/attachment.png',
+                          child: Image.network(
+                            'https://www.lpstationery.com/image/lianpang/image/data/all_product_images/product-343/salary%20voucher2.jpg',
                             fit: BoxFit.cover,
                           ),
                         ),

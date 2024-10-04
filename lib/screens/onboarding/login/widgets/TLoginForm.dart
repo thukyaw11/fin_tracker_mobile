@@ -24,8 +24,10 @@ class TLoginForm extends StatelessWidget {
             //Email
             TextFormField(
               controller: controller.emailController,
+              cursorColor: AppColors.primaryColor,
               decoration: InputDecoration(
-                prefixIcon: const Icon(Iconsax.direct_right),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                prefixIcon: const Icon(Iconsax.direct_right, color: AppColors.primaryColor,),
                 labelText: 'Email', // Replace TTexts.email with your text
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
@@ -51,14 +53,17 @@ class TLoginForm extends StatelessWidget {
 
             //Password
             Obx(() => TextFormField(
+              cursorColor: AppColors.primaryColor,
                   controller: controller.passwordController,
                   obscureText: controller.obscureText.value,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Iconsax.password_check),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    prefixIcon: const Icon(Iconsax.password_check, color: AppColors.primaryColor,),
                     labelText:
                         'Password', // Replace TTexts.password with your text
                     suffixIcon: IconButton(
                       icon: Icon(
+                        color: AppColors.primaryColor,
                         controller.obscureText.value
                             ? Iconsax.eye_slash
                             : Iconsax.eye,
@@ -93,7 +98,7 @@ class TLoginForm extends StatelessWidget {
                 //Remember Me
                 Row(
                   children: [
-                    Checkbox(value: true, onChanged: (value) {}),
+                    Checkbox(value: true, onChanged: (value) {}, checkColor: Colors.white, activeColor: AppColors.primaryColor,),
                     const Text(TTexts.rememberMe),
                   ],
                 ),
@@ -101,7 +106,7 @@ class TLoginForm extends StatelessWidget {
                 //Forget Password
                 TextButton(
                     onPressed: () => {},
-                    child: const Text(TTexts.forgetPassword)),
+                    child: const Text(TTexts.forgetPassword, style: TextStyle(color: AppColors.primaryColor),)),
               ],
             ),
             const SizedBox(
