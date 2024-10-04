@@ -6,6 +6,8 @@ import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:iconsax/iconsax.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -30,22 +32,22 @@ class HomePage extends StatelessWidget {
             },
             items: [
               SalomonBottomBarItem(
-                icon: const Icon(Icons.home),
+                icon: const Icon(Iconsax.home),
                 title: const Text("Home"),
                 selectedColor: AppColors.primaryColor,
               ),
               SalomonBottomBarItem(
-                icon: const Icon(Icons.track_changes_rounded),
+                icon: const Icon(Iconsax.transaction_minus),
                 title: const Text("Tracker"),
                 selectedColor: AppColors.primaryColor,
               ),
               SalomonBottomBarItem(
-                icon: const Icon(Icons.golf_course_sharp),
+                icon: const Icon(Iconsax.money),
                 title: const Text("Goal"),
                 selectedColor: AppColors.primaryColor,
               ),
               SalomonBottomBarItem(
-                icon: const Icon(Icons.person),
+                icon: const Icon(Iconsax.user),
                 title: const Text("Profile"),
                 selectedColor: AppColors.primaryColor,
               ),
