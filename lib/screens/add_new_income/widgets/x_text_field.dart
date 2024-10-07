@@ -1,5 +1,6 @@
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class XTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -30,6 +31,7 @@ class XTextField extends StatelessWidget {
             ],
           ),
         ),
+        const Gap(10),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: TextField(
@@ -37,7 +39,6 @@ class XTextField extends StatelessWidget {
             controller: controller,
             decoration: InputDecoration(
               focusColor: AppColors.primaryColor,
-
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                   color: AppColors.primaryColor,

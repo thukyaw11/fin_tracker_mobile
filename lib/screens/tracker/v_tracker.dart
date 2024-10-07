@@ -1,7 +1,7 @@
 import 'package:expense_tracker_mobile/controllers/group/c_group.dart';
 import 'package:expense_tracker_mobile/controllers/tracker/c_toggle_switch.dart';
 import 'package:expense_tracker_mobile/controllers/tracker/c_wallet.dart';
-import 'package:expense_tracker_mobile/screens/add_new_income/v_add_new_income.dart';
+import 'package:expense_tracker_mobile/screens/add_new_income/v_add_new_transaction.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_drop_down_button.dart';
 import 'package:expense_tracker_mobile/screens/tracker/widgets/earning_text.dart';
 import 'package:expense_tracker_mobile/screens/tracker/widgets/toggle_switch.dart';
@@ -41,7 +41,7 @@ class TrackerScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
         onPressed: () {
-          Get.to(AddNewIncome());
+          Get.to(AddNewTransaction());
         },
         backgroundColor: AppColors.primaryColor,
         child: const Icon(
@@ -123,7 +123,6 @@ class TrackerScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                // Expanded for scrollable wallet section
                 Expanded(
                   child: Obx(() {
                     if (_trackerController.wallets.isEmpty) {
@@ -138,8 +137,8 @@ class TrackerScreen extends StatelessWidget {
                           return BuildWalletCard(
                             imageUrl:
                                 "https://cloud.farytaxi.com/uploads/parenthand/7fd3f3a0-7c14-477a-9d8a-13594044539d.jpg", // Fetch image URL from the wallet data
-                            payName: wallet['walletTitle'],
-                            amount: wallet['walletAmount'],
+                            payName: wallet.walletTitle,
+                            amount: 10000,
                           );
                         },
                       );
