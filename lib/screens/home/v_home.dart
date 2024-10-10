@@ -6,7 +6,9 @@ import 'package:expense_tracker_mobile/screens/home/widgets/build_income_expense
 import 'package:expense_tracker_mobile/screens/home/widgets/build_transaction_items.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
@@ -98,12 +100,17 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const Column(
                   children: [
-                    Text('Total Income', style: TextStyle(color: Colors.grey),),
-                    Text('530,000 Ks',  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),),
-
+                    Text(
+                      'Total Income',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '530,000 Ks',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -134,14 +141,39 @@ class HomeScreen extends StatelessWidget {
               if (_transactionController.isLoading.value) {
                 return const Center(child: CircularProgressIndicator());
               }
+
+              if (_transactionController.transactionRecords.isEmpty) {
+                return const Padding(
+                  padding: EdgeInsets.only(top: 120),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Icon(
+                          Iconsax.empty_wallet,
+                          color: Colors.grey,
+                          size: 50,
+                        ),
+                        Gap(20),
+                        Text(
+                          "No Record",
+                          style: TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              }
               return Expanded(
                 child: ListView.builder(
                   itemCount: _transactionController.transactionRecords.length,
                   itemBuilder: (context, index) {
-                    final transaction = _transactionController.transactionRecords[index];
+                    final transaction =
+                        _transactionController.transactionRecords[index];
                     DateTime adjustedTime = transaction.createdAt
                         .add(const Duration(hours: 6, minutes: 30));
-                    String formattedTime = DateFormat('h:mm a').format(adjustedTime);
+                    String formattedTime =
+                        DateFormat('h:mm a').format(adjustedTime);
 
                     return buildTransactionItem(
                       transaction.cashCategory.name,
@@ -154,7 +186,6 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
               );
-
             }),
           ],
         ),

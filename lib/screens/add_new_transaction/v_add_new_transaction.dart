@@ -1,11 +1,15 @@
-import 'package:expense_tracker_mobile/screens/add_new_income/c_add_new_transaction.dart';
-import 'package:expense_tracker_mobile/screens/add_new_income/widgets/category_bottom_sheet.dart';
-import 'package:expense_tracker_mobile/screens/add_new_income/widgets/group_bottom_sheet.dart';
-import 'package:expense_tracker_mobile/screens/add_new_income/widgets/wallet_bottom_sheet.dart';
-import 'package:expense_tracker_mobile/screens/add_new_income/widgets/x_text_field.dart';
+import 'package:expense_tracker_mobile/screens/add_new_transaction/c_add_new_transaction.dart';
+import 'package:expense_tracker_mobile/screens/add_new_transaction/widgets/category_bottom_sheet.dart';
+import 'package:expense_tracker_mobile/screens/add_new_transaction/widgets/group_bottom_sheet.dart';
+import 'package:expense_tracker_mobile/screens/add_new_transaction/widgets/image_picker.dart';
+import 'package:expense_tracker_mobile/screens/add_new_transaction/widgets/wallet_bottom_sheet.dart';
+import 'package:expense_tracker_mobile/screens/add_new_transaction/widgets/x_text_area.dart';
+import 'package:expense_tracker_mobile/screens/add_new_transaction/widgets/x_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+
+import '../../utils/constants/app_colors.dart';
 
 class AddNewTransaction extends StatelessWidget {
   AddNewTransaction({super.key});
@@ -13,7 +17,7 @@ class AddNewTransaction extends StatelessWidget {
   final AddNewTransactionController addNewTransactionController =
       Get.put(AddNewTransactionController());
   final TextEditingController amountController = TextEditingController();
-  final TextEditingController categoryController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,7 @@ class AddNewTransaction extends StatelessWidget {
               const Gap(20),
               GestureDetector(
                 onTap: () {
-                  CategoryBottomSheet.show();
+                  CategoryBottomSheet().show();
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
@@ -57,14 +61,14 @@ class AddNewTransaction extends StatelessWidget {
                       Obx(() {
                         return Text(
                           addNewTransactionController
-                                  .selectedCategory.value.isEmpty
+                                  .selectedCategory.value.name.isEmpty
                               ? 'Select Category'
                               : addNewTransactionController
-                                  .selectedCategory.value,
+                                  .selectedCategory.value.name,
                           style: TextStyle(
                             fontSize: 16.0,
                             color: addNewTransactionController
-                                    .selectedCategory.value.isEmpty
+                                    .selectedCategory.value.name.isEmpty
                                 ? Colors.grey
                                 : Colors.black,
                           ),
@@ -115,7 +119,7 @@ class AddNewTransaction extends StatelessWidget {
               const Gap(20),
               GestureDetector(
                 onTap: () {
-                  GroupBottomSheet.show();
+                  GroupBottomSheet().show();
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
@@ -148,7 +152,36 @@ class AddNewTransaction extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const Gap(20),
+              XTextArea(
+                controller: descriptionController,
+                labelText: 'Description',
+              ),
+              const Gap(20),
+              ImagePickerWidget(),
+              const Gap(20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    padding: const EdgeInsets.all(16),
+                    foregroundColor: AppColors.accentColor,
+                    backgroundColor: AppColors.primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    'Continue',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: AppColors.accentColor,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

@@ -59,21 +59,24 @@ class TRegisterForm extends StatelessWidget {
 
             //Sign In Button
             SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                    onPressed: controller.register,
-                    child: const Text(TTexts.createAccount))),
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: controller.register,
+                child: const Text(TTexts.createAccount),
+              ),
+            ),
             const SizedBox(height: TSizes.spaceBtwItems),
 
             //Create Account Button
             SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                    onPressed: () {
-                      // Navigate to the Sign Up page
-                      Get.to(() => LoginScreen());
-                    },
-                    child: const Text(TTexts.signIn))),
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () {
+                  Get.to(() => LoginScreen());
+                },
+                child: const Text(TTexts.signIn),
+              ),
+            ),
             const SizedBox(height: TSizes.spaceBtwSections),
           ],
         ),

@@ -1,5 +1,5 @@
 import 'package:expense_tracker_mobile/controllers/tracker/c_wallet.dart';
-import 'package:expense_tracker_mobile/screens/add_new_income/c_add_new_transaction.dart';
+import 'package:expense_tracker_mobile/screens/add_new_transaction/c_add_new_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -39,7 +39,7 @@ class WalletBottomSheet {
             ListView(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              children: buildCategoryItems(),
+              children: buildWalletItems(),
             ),
           ],
         ),
@@ -51,7 +51,7 @@ class WalletBottomSheet {
     );
   }
 
-  List<Widget> buildCategoryItems() {
+  List<Widget> buildWalletItems() {
     return trackerController.wallets.map((wallet) {
       return Column(
         children: [
@@ -60,7 +60,7 @@ class WalletBottomSheet {
             color: Colors.red,
             text: wallet.walletTitle,
             onTap: () {
-              addNewTransactionController.selectedCategory.value =
+              addNewTransactionController.selectedWallet.value =
                   wallet.walletTitle;
               Get.back();
             },

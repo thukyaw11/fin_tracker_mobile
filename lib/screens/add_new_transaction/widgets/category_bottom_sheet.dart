@@ -1,4 +1,5 @@
-import 'package:expense_tracker_mobile/screens/add_new_income/c_add_new_transaction.dart';
+import 'package:expense_tracker_mobile/controllers/category/c_category.dart';
+import 'package:expense_tracker_mobile/screens/add_new_transaction/c_add_new_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,9 @@ class CategoryBottomSheet {
   static final AddNewTransactionController addNewTransactionController =
       Get.find();
 
-  static void show() {
+  final CategoryController categoryController = Get.find();
+
+  void show() {
     Get.bottomSheet(
       Container(
         padding: const EdgeInsets.all(30),
@@ -33,49 +36,11 @@ class CategoryBottomSheet {
               ],
             ),
             const SizedBox(height: 20),
-            _buildCategoryItem(
-              icon: Iconsax.shop5,
-              color: Colors.orange,
-              text: "Shopping",
-              onTap: () {
-                addNewTransactionController.selectedCategory.value = 'Shopping';
-                Get.back();
-              },
+            ListView(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: buildCategoryItems(),
             ),
-            const SizedBox(height: 20),
-            _buildCategoryItem(
-              icon: Iconsax.money5,
-              color: Colors.purple,
-              text: "Subscription",
-              onTap: () {
-                addNewTransactionController.selectedCategory.value =
-                    'Subscription';
-                Get.back();
-              },
-            ),
-            const SizedBox(height: 20),
-            _buildCategoryItem(
-              icon: Iconsax.car5,
-              color: Colors.blue,
-              text: "Transportation",
-              onTap: () {
-                addNewTransactionController.selectedCategory.value =
-                    'Transportation';
-                Get.back();
-              },
-            ),
-            const SizedBox(height: 20),
-            _buildCategoryItem(
-              icon: Iconsax.cake5,
-              color: Colors.red,
-              text: "Food",
-              onTap: () {
-                addNewTransactionController.selectedCategory.value = 'Food';
-
-                Get.back(); // Close the bottom sheet if needed
-              },
-            ),
-            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -83,6 +48,25 @@ class CategoryBottomSheet {
       enableDrag: true,
       backgroundColor: Colors.transparent,
     );
+  }
+
+  List<Widget> buildCategoryItems() {
+    return categoryController.categories.map((cate) {
+      return Column(
+        children: [
+          _buildCategoryItem(
+            icon: Iconsax.money5,
+            color: Colors.red,
+            text: cate.name,
+            onTap: () {
+              addNewTransactionController.selectCategory(cate.name, cate.id);
+              Get.back();
+            },
+          ),
+          const SizedBox(height: 20),
+        ],
+      );
+    }).toList();
   }
 
   // Method to build a category item

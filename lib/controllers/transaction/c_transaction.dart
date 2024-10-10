@@ -12,7 +12,6 @@ class TransactionController extends GetxController {
 
   @override
   void onInit() {
-
     fetchTransactions();
     super.onInit();
   }
@@ -20,7 +19,6 @@ class TransactionController extends GetxController {
   Future<void> fetchTransactions() async {
     try {
       isLoading.value = true;
-      var groupId = _groupController.selectedGroupName.value;
       final fetchedTransactions = await apiService.getAllTransactions();
       transactionRecords.assignAll(fetchedTransactions);
     } catch (e) {

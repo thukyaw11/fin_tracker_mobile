@@ -1,14 +1,17 @@
+import 'package:expense_tracker_mobile/controllers/category/c_category.dart';
 import 'package:expense_tracker_mobile/controllers/group/c_group.dart';
 import 'package:expense_tracker_mobile/controllers/tracker/c_toggle_switch.dart';
 import 'package:expense_tracker_mobile/controllers/tracker/c_wallet.dart';
-import 'package:expense_tracker_mobile/screens/add_new_income/v_add_new_transaction.dart';
+import 'package:expense_tracker_mobile/screens/add_new_transaction/v_add_new_transaction.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_drop_down_button.dart';
 import 'package:expense_tracker_mobile/screens/tracker/widgets/earning_text.dart';
 import 'package:expense_tracker_mobile/screens/tracker/widgets/toggle_switch.dart';
 import 'package:expense_tracker_mobile/screens/tracker/widgets/wallet_card.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class TrackerScreen extends StatelessWidget {
@@ -20,12 +23,14 @@ class TrackerScreen extends StatelessWidget {
     await _trackerController.fetchWallets();
     await _trackerController.fetchTrackerMoney();
     await _groupController.getAllGroups();
+    await _categoryController.getAllCategory();
   }
 
   final ToggleSwitchController controller = Get.put(ToggleSwitchController());
 
   final TrackerController _trackerController = Get.put(TrackerController());
   final GroupController _groupController = Get.find();
+  final CategoryController _categoryController = Get.put(CategoryController());
 
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -126,7 +131,27 @@ class TrackerScreen extends StatelessWidget {
                 Expanded(
                   child: Obx(() {
                     if (_trackerController.wallets.isEmpty) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 120),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Icon(
+                                Iconsax.empty_wallet,
+                                color: Colors.grey,
+                                size: 50,
+                              ),
+                              Gap(20),
+                              Text(
+                                "No Wallet",
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
                     } else {
                       return ListView.builder(
                         padding: const EdgeInsets.only(left: 0),
