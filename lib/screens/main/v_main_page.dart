@@ -1,4 +1,5 @@
 import 'package:expense_tracker_mobile/controllers/navigation/c_navigation.dart';
+import 'package:expense_tracker_mobile/screens/goal/v_goal.dart';
 import 'package:expense_tracker_mobile/screens/home/v_home.dart';
 import 'package:expense_tracker_mobile/screens/profile/v_profile.dart';
 import 'package:expense_tracker_mobile/screens/tracker/v_tracker.dart';
@@ -7,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:iconsax/iconsax.dart';
-
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
     final List<Widget> pages = [
       HomeScreen(),
       TrackerScreen(),
-      HomeScreen(),
+      GoalScreen(),
       const ProfileScreen(),
     ];
 
