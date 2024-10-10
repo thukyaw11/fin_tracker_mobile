@@ -5,6 +5,7 @@ import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'dart:io';
 
 import 'controllers/group/c_group.dart';
 import 'screens/main/v_main_page.dart';
@@ -16,7 +17,16 @@ void main() async {
     const Duration(seconds: 5),
   );
   FlutterNativeSplash.remove();
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
+}
+
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
 }
 
 class MyApp extends StatelessWidget {
