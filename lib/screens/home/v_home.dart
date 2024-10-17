@@ -3,7 +3,9 @@ import 'package:expense_tracker_mobile/controllers/transaction/c_transaction.dar
 import 'package:expense_tracker_mobile/screens/home/widgets/build_drop_down_button.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_income_expense_card.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_transaction_items.dart';
+import 'package:expense_tracker_mobile/screens/home/widgets/w_month_drop_down.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
+import 'package:expense_tracker_mobile/utils/helpers/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -19,9 +21,19 @@ class HomeScreen extends StatelessWidget {
   }
 
   Future<void> _initData() async {
-    await _groupController.getAllGroups();
-    await _transactionController.fetchTransactions();
-    await _transactionController.fetchIncomeExpense();
+    try {
+      await Future.wait([
+        _groupController.getAllGroups(),
+        _transactionController.fetchTransactions(),
+        _transactionController.fetchIncomeExpense()
+      ]);
+    } catch (e) {
+      Logger.superPrint(e);
+    }
+
+    // await _groupController.getAllGroups();
+    // await _transactionController.fetchTransactions();
+    // await _transactionController.fetchIncomeExpense();
   }
 
   final TransactionController _transactionController = Get.find();
@@ -85,18 +97,9 @@ class HomeScreen extends StatelessWidget {
                       },
                     );
                   }),
-                  Obx(() {
-                    return buildDropdownButton(
-                      title: selectedItem.value,
-                      items: dropdownItems,
-                      selectedItem: selectedItem.value,
-                      onChanged: (value) {
-                        if (value != null) {
-                          selectedItem.value = value;
-                        }
-                      },
-                    );
-                  }),
+                  MonthSelectorWidget(onSelect: (start, end) {
+                    Logger.superPrint("start $start", title: "end $end");
+                  })
                 ],
               ),
               const SizedBox(height: 20),
