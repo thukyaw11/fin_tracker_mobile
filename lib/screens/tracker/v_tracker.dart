@@ -28,7 +28,7 @@ class TrackerScreen extends StatelessWidget {
 
   final ToggleSwitchController controller = Get.put(ToggleSwitchController());
 
-  final TrackerController _trackerController = Get.put(TrackerController());
+  final TrackerController _trackerController = Get.find();
   final GroupController _groupController = Get.find();
   final CategoryController _categoryController = Get.put(CategoryController());
 

@@ -1,4 +1,5 @@
 import 'package:expense_tracker_mobile/screens/goal/v_detail_goal.dart';
+import 'package:expense_tracker_mobile/screens/goal/v_new_goal.dart';
 import 'package:expense_tracker_mobile/screens/home/widgets/build_drop_down_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -18,7 +19,9 @@ class GoalScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
-        onPressed: () {},
+        onPressed: () {
+          Get.to(AddNewGoal());
+        },
         backgroundColor: AppColors.primaryColor,
         child: const Icon(
           Icons.add,

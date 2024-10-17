@@ -28,7 +28,7 @@ class TrackerController extends GetxController {
   Future<void> fetchTrackerMoney() async {
     try {
       final incomeExpense = await apiService.getIncomeExpense(
-          'INCOME', '2161e29b-f18f-438a-bfdb-62e6c2b482cd');
+          'INCOME', 'cafad70c-e285-44f0-bcd9-48effca3203b');
 
       totalIncome.value = incomeExpense.income.toInt();
       totalExpense.value = incomeExpense.expense.toInt();

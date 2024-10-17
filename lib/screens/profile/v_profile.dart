@@ -1,7 +1,11 @@
 import 'package:expense_tracker_mobile/screens/onboarding/v_onboarding.dart';
 import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+
+import '../../utils/constants/app_colors.dart';
+import '../../utils/helpers/x_success_dialog.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -107,28 +111,7 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(height: 15),
                 GestureDetector(
                   onTap: () {
-                    Get.dialog(
-                      AlertDialog(
-                        title: const Text("Are you sure to log out?"),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Get.back(); // Close the dialog
-                            },
-                            child: const Text("Cancel"),
-                          ),
-                          TextButton(
-                            onPressed: () async {
-                              // Handle confirm action
-                              await SharedPreferenceService.removeAccessToken();
-                              Get.to(
-                                  const OnBoardingScreen()); // Close the dialog
-                            },
-                            child: const Text("I'm sure"),
-                          ),
-                        ],
-                      ),
-                    );
+                    showLogoutConfirmSheet();
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -163,6 +146,102 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void showLogoutConfirmSheet() {
+    Get.bottomSheet(
+      Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        padding: const EdgeInsets.only(
+          left: 18,
+          right: 18,
+          top: 18,
+        ),
+        child: SizedBox(
+          width: double.infinity,
+          height: 200,
+          child: Column(
+            children: [
+              Container(
+                height: 10,
+                width: 50,
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              const Gap(20),
+              const Text(
+                "Are you sure to logout?",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "Are you sure that you would like to log out of this account?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                  color: Color(0XFF91919F),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: AppColors.accentColor,
+                      minimumSize: const Size(160, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    child: const Text(
+                      "No",
+                      style: TextStyle(
+                          color: AppColors.primaryColor, fontSize: 18),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      await SharedPreferenceService.removeAccessToken();
+                      Get.to(const OnBoardingScreen());
+                    },
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: AppColors.primaryColor,
+                      minimumSize: const Size(160, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    child: const Text(
+                      "Yes",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+      enableDrag: true,
+      isScrollControlled: true,
     );
   }
 }

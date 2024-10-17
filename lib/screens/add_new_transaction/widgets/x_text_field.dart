@@ -4,12 +4,16 @@ import 'package:gap/gap.dart';
 
 class XTextField extends StatelessWidget {
   final TextEditingController controller;
-  final String labelText;
+  final String? labelText;
+  final String placeHolder;
+  final String? suffixText;
 
   const XTextField({
     super.key,
     required this.controller,
-    required this.labelText,
+    required this.placeHolder,
+    this.labelText,
+    this.suffixText,
   });
 
   @override
@@ -17,20 +21,21 @@ class XTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RichText(
-          text: TextSpan(
-            children: <TextSpan>[
-              TextSpan(
-                text: labelText,
-                style: const TextStyle(color: Colors.black),
-              ),
-              const TextSpan(
-                text: ' *',
-                style: TextStyle(color: Colors.red), // Style for the '*'
-              ),
-            ],
+        if (labelText != null)
+          RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  text: labelText,
+                  style: const TextStyle(color: Colors.black),
+                ),
+                const TextSpan(
+                  text: ' *',
+                  style: TextStyle(color: Colors.red), // Style for the '*'
+                ),
+              ],
+            ),
           ),
-        ),
         const Gap(10),
         TextField(
           cursorColor: AppColors.primaryColor,
@@ -48,7 +53,8 @@ class XTextField extends StatelessWidget {
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
-            labelText: 'Enter $labelText',
+            labelText: placeHolder,
+            suffixText: suffixText,
           ),
         ),
       ],

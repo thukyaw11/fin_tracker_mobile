@@ -1,22 +1,18 @@
-import 'package:expense_tracker_mobile/controllers/group/c_group.dart';
 import 'package:expense_tracker_mobile/screens/add_new_transaction/c_add_new_transaction.dart';
-import 'package:expense_tracker_mobile/utils/helpers/logger.dart';
+import 'package:expense_tracker_mobile/utils/enums/transaction_type.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-class GroupBottomSheet {
+class TransactionTypeBottomSheet {
   static final AddNewTransactionController addNewTransactionController =
       Get.find();
 
-  final GroupController groupController = Get.find();
-
   void show() {
-    Logger.superPrint(groupController.groups);
     Get.bottomSheet(
       Container(
-        height: Get.height * 0.7,
+        height: Get.height * 0.4,
         padding: const EdgeInsets.all(30),
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -30,7 +26,7 @@ class GroupBottomSheet {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "Select Group",
+                  "Select Transaction Type",
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
@@ -39,11 +35,29 @@ class GroupBottomSheet {
               ],
             ),
             const SizedBox(height: 20),
-            Expanded(
-              child: ListView(
-                children: buildGroupItems(),
-              ),
-            ),
+            Column(
+              children: [
+                _buildTransactionTypeItem(
+                    icon: Iconsax.money,
+                    color: Colors.green,
+                    text: 'Income',
+                    onTap: () {
+                      addNewTransactionController.selectedType.value =
+                          TransactionType.INCOME;
+                      Get.back();
+                    }),
+                const Gap(20),
+                _buildTransactionTypeItem(
+                    icon: Iconsax.money,
+                    color: Colors.red,
+                    text: 'Expense',
+                    onTap: () {
+                      addNewTransactionController.selectedType.value =
+                          TransactionType.EXPENSE;
+                      Get.back();
+                    }),
+              ],
+            )
           ],
         ),
       ),
@@ -53,27 +67,7 @@ class GroupBottomSheet {
     );
   }
 
-  List<Widget> buildGroupItems() {
-    return groupController.groups.map((group) {
-      Logger.superPrint(group);
-      return Column(
-        children: [
-          _buildCategoryItem(
-            icon: Iconsax.money5,
-            color: Colors.orange,
-            text: group.name,
-            onTap: () {
-              addNewTransactionController.selectGroup(group.name, group.id);
-              Get.back();
-            },
-          ),
-          const SizedBox(height: 20),
-        ],
-      );
-    }).toList();
-  }
-
-  static Widget _buildCategoryItem({
+  static Widget _buildTransactionTypeItem({
     required IconData icon,
     required Color color,
     required String text,

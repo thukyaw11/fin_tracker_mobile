@@ -1,4 +1,6 @@
 import 'package:expense_tracker_mobile/common/svg/app_svg.dart';
+import 'package:expense_tracker_mobile/screens/home/v_home.dart';
+import 'package:expense_tracker_mobile/screens/main/v_main_page.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:expense_tracker_mobile/utils/helpers/x_date_foramtter.dart';
 import 'package:expense_tracker_mobile/utils/helpers/x_success_dialog.dart';
@@ -298,6 +300,14 @@ class TransactionDetailsPage extends StatelessWidget {
           height: 200,
           child: Column(
             children: [
+              Container(
+                height: 10,
+                width: 50,
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              const Gap(20),
               const Text(
                 "Remove this transaction?",
                 style: TextStyle(

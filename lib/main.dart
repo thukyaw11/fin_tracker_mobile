@@ -1,6 +1,9 @@
+import 'package:expense_tracker_mobile/controllers/tracker/c_wallet.dart';
+import 'package:expense_tracker_mobile/controllers/transaction/c_transaction.dart';
 import 'package:expense_tracker_mobile/screens/onboarding/v_onboarding.dart';
-import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
+import 'package:expense_tracker_mobile/utils/constants/api_constants.dart';
 import 'package:expense_tracker_mobile/utils/services/api_services.dart';
+import 'package:expense_tracker_mobile/utils/services/network/api_service.dart';
 import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -18,14 +21,18 @@ void main() async {
   );
   FlutterNativeSplash.remove();
   HttpOverrides.global = MyHttpOverrides();
+  final apiService = CommonApiService(baseUrl: ApiConstants.url);
+
+  Get.put(apiService);
   runApp(const MyApp());
 }
 
-class MyHttpOverrides extends HttpOverrides{
+class MyHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext? context){
+  HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
 
@@ -38,7 +45,8 @@ class MyApp extends StatelessWidget {
       title: 'FinTracker',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Colors.white,
+        appBarTheme: const AppBarTheme(
+          color: Colors.white,
           titleTextStyle: TextStyle(
             color: Colors.black,
             fontSize: 20,
@@ -46,7 +54,8 @@ class MyApp extends StatelessWidget {
           ),
           iconTheme: IconThemeData(
             color: Colors.black,
-          ),),
+          ),
+        ),
         textTheme: const TextTheme(
           bodyLarge: TextStyle(fontFamily: 'Poppins'),
           bodyMedium: TextStyle(fontFamily: 'Poppins'),
@@ -85,7 +94,10 @@ class _AuthCheckerState extends State<AuthChecker> {
   void _checkAuthentication() async {
     String? token = await SharedPreferenceService.getAccessToken();
     Get.lazyPut(() => ApiService());
+    Get.lazyPut(() => CommonApiService(baseUrl: ApiConstants.url));
     Get.lazyPut(() => GroupController());
+    Get.lazyPut(() => TrackerController());
+    Get.lazyPut(() => TransactionController());
 
     final ApiService apiService = Get.find<ApiService>();
 

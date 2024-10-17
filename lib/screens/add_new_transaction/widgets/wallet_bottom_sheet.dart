@@ -60,8 +60,9 @@ class WalletBottomSheet {
             color: Colors.red,
             text: wallet.walletTitle,
             onTap: () {
-              addNewTransactionController.selectedWallet.value =
-                  wallet.walletTitle;
+              addNewTransactionController.selectWallet(
+                  wallet.walletTitle, wallet.id);
+
               Get.back();
             },
           ),
