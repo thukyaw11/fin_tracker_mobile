@@ -1,4 +1,6 @@
 import 'package:expense_tracker_mobile/screens/onboarding/v_onboarding.dart';
+import 'package:expense_tracker_mobile/screens/profile/v_setting.dart';
+import 'package:expense_tracker_mobile/utils/constants/app_constants.dart';
 import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -79,7 +81,11 @@ class ProfileScreen extends StatelessWidget {
             child: Column(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => const SettingsPage(),
+                        transition: AppConstants.pageTransition,
+                        duration: AppConstants.transitionDuration);
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
