@@ -1,3 +1,4 @@
+import 'package:expense_tracker_mobile/controllers/goal/m_goal_model.dart';
 import 'package:expense_tracker_mobile/screens/add_new_transaction/widgets/x_text_field.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
 import 'package:expense_tracker_mobile/utils/helpers/x_success_dialog.dart';
@@ -6,15 +7,11 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-
-class GoalController extends GetxController {
-  var dateText = ''.obs;
-}
+import '../../utils/services/format_service.dart';
 
 class DetailGoal extends StatelessWidget {
-  final GoalController controller = Get.put(GoalController());
-  DetailGoal({super.key});
-
+  DetailGoal({super.key, required this.selectedGoal});
+  final GoalModel selectedGoal;
   final TextEditingController amountController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
 
@@ -52,24 +49,25 @@ class DetailGoal extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            const Center(
+            Center(
               child: Text(
-                "400,000 Ks",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+                "${FormatService.numberFormat.format(selectedGoal.savedAmount)} Ks",
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
               ),
             ),
             const Gap(30),
 
             // Centering the LinearPercentIndicator
             LinearPercentIndicator(
-              width: MediaQuery.of(context).size.width,
+              width: Get.width,
               lineHeight: 25.0,
-              percent: 0.8,
+              percent: getPercentage(),
               animation: true,
               animationDuration: 2000,
-              center: const Text(
-                "80.0%",
-                style: TextStyle(fontSize: 12.0, color: Colors.white),
+              center: Text(
+                "${(getPercentage() * 100).toStringAsFixed(1)} %",
+                style: const TextStyle(fontSize: 12.0, color: Colors.white),
               ),
               barRadius: const Radius.circular(20),
               backgroundColor: Colors.grey,
@@ -77,21 +75,21 @@ class DetailGoal extends StatelessWidget {
             ),
 
             const Gap(30),
-            const Center(
+            Center(
               child: Text.rich(
                 textAlign: TextAlign.center,
                 TextSpan(
                   text: "You have ",
-                  style: TextStyle(fontSize: 18, color: Colors.grey),
+                  style: const TextStyle(fontSize: 18, color: Colors.grey),
                   children: [
                     TextSpan(
-                      text: "100,000 Ks",
-                      style: TextStyle(
+                      text: getLeftAmount(),
+                      style: const TextStyle(
                         color: AppColors.primaryColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    TextSpan(
+                    const TextSpan(
                       text: " left to  \n achieve goal!",
                     ),
                   ],
@@ -100,89 +98,90 @@ class DetailGoal extends StatelessWidget {
             ),
             const Gap(60),
 
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Goal",
                     style: TextStyle(fontSize: 20),
                   ),
                   Text(
-                    "Adopt a Kitten",
-                    style: TextStyle(fontSize: 20),
+                    selectedGoal.title,
+                    style: const TextStyle(fontSize: 20),
                   )
                 ],
               ),
             ),
             const Gap(25),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Deadline",
                     style: TextStyle(fontSize: 20),
                   ),
                   Text(
-                    "Dec 12, 2024",
-                    style: TextStyle(fontSize: 20),
+                    selectedGoal.deadLine,
+                    style: const TextStyle(fontSize: 20),
                   )
                 ],
               ),
             ),
             const Gap(25),
 
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Status",
                     style: TextStyle(fontSize: 20),
                   ),
                   Text(
-                    "Ongoing",
-                    style: TextStyle(fontSize: 20),
+                    selectedGoal.status.name.capitalizeFirst ??
+                        selectedGoal.status.name,
+                    style: const TextStyle(fontSize: 20),
                   )
                 ],
               ),
             ),
             const Gap(25),
 
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Saved Amount",
                     style: TextStyle(fontSize: 20),
                   ),
                   Text(
-                    "400,000 Ks",
-                    style: TextStyle(fontSize: 20, color: Colors.green),
+                    "${FormatService.numberFormat.format(selectedGoal.savedAmount)} Ks",
+                    style: const TextStyle(fontSize: 20, color: Colors.green),
                   )
                 ],
               ),
             ),
             const Gap(25),
 
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Goal Amount",
                     style: TextStyle(fontSize: 20),
                   ),
                   Text(
-                    "500,000 Ks",
-                    style: TextStyle(fontSize: 20),
+                    "${FormatService.numberFormat.format(selectedGoal.amount)} Ks",
+                    style: const TextStyle(fontSize: 20),
                   )
                 ],
               ),
@@ -423,5 +422,20 @@ class DetailGoal extends StatelessWidget {
       enableDrag: true,
       isScrollControlled: true,
     );
+  }
+
+  String getLeftAmount() {
+    int aa = selectedGoal.amount >= selectedGoal.savedAmount
+        ? selectedGoal.amount - selectedGoal.savedAmount
+        : 0;
+    return "${FormatService.numberFormat.format(aa)} Ks";
+  }
+
+  double getPercentage() {
+    if (selectedGoal.amount <= 0) {
+      return 0;
+    }
+    double percentage = (selectedGoal.savedAmount / selectedGoal.amount);
+    return percentage;
   }
 }
