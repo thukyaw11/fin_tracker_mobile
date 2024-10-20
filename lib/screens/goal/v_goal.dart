@@ -62,12 +62,17 @@ class GoalScreen extends StatelessWidget {
       child: Obx(() {
         return controller.goals.isEmpty
             ? const Center(child: Text("Empty!"))
-            : ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: controller.goals.length,
-                itemBuilder: (context, index) {
-                  return EachGoalCard(eachGoal: controller.goals[index]);
-                });
+            : RefreshIndicator(
+                onRefresh: () async {
+                  await controller.getGoals();
+                },
+                child: ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount: controller.goals.length,
+                    itemBuilder: (context, index) {
+                      return EachGoalCard(eachGoal: controller.goals[index]);
+                    }),
+              );
       }),
     );
   }
