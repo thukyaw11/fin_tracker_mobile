@@ -225,7 +225,7 @@ class ProfileScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () async {
                       await SharedPreferenceService.removeAccessToken();
-                      Get.to(const OnBoardingScreen());
+                      Get.offAll(() => const OnBoardingScreen());
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,

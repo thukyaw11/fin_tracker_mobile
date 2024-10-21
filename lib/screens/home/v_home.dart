@@ -15,35 +15,38 @@ import 'package:expense_tracker_mobile/utils/helpers/num_format.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 // ignore: must_be_immutable
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key}) {
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  initState() {
     _initData();
-  }
-
-  Future<void> _initData() async {
-    try {
-      await Future.wait([
-        _groupController.getAllGroups(),
-        _transactionController.fetchTransactions(),
-        _transactionController.fetchIncomeExpense()
-      ]);
-    } catch (e) {
-      Logger.superPrint(e);
-    }
-
-    // await _groupController.getAllGroups();
-    // await _transactionController.fetchTransactions();
-    // await _transactionController.fetchIncomeExpense();
+    super.initState();
   }
 
   final TransactionController _transactionController = Get.find();
+
   final GroupController _groupController = Get.find();
 
   final List<String> dropdownItems = ["Personal", "Business", "Savings"];
+
   var selectedItem = 'Personal'.obs;
 
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+
+  Future<void> _initData() async {
+    await _groupController.getAllGroups();
+    await Future.wait([
+      _transactionController.fetchTransactions(),
+      _transactionController.fetchIncomeExpense()
+    ]);
+  }
 
   void _onRefresh() async {
     _initData();
@@ -93,12 +96,20 @@ class HomeScreen extends StatelessWidget {
                       onChanged: (value) {
                         if (value != null) {
                           _groupController.selectedGroupName.value = value;
+                          _groupController.selectedGroupId.value =
+                              _groupController.groups
+                                  .where((a) => a.name == value)
+                                  .first
+                                  .id;
+                          _transactionController.fetchIncomeExpense();
                         }
                       },
                     );
                   }),
                   MonthSelectorWidget(onSelect: (start, end) {
-                    Logger.superPrint("start $start", title: "end $end");
+                    _transactionController.startDate = start;
+                    _transactionController.endDate = end;
+                    _transactionController.fetchIncomeExpense();
                   })
                 ],
               ),

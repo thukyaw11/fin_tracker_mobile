@@ -19,9 +19,15 @@ class TransactionController extends GetxController {
   var totalIncome = 0.obs;
   var totalExpense = 0.obs;
 
+  DateTime now = DateTime.now();
+  String startDate = "";
+  String endDate = "";
+
   @override
   void onInit() {
     fetchTransactions();
+    startDate = "${DateTime(now.year, now.month, 1).toIso8601String()}Z";
+    endDate = "${DateTime(now.year, now.month + 1, 0).toIso8601String()}Z";
     super.onInit();
   }
 
@@ -39,12 +45,15 @@ class TransactionController extends GetxController {
 
   Future<void> fetchIncomeExpense() async {
     try {
-      final fetchedIncomeExpense = await _commonApiService.getRequest(
-          '/transaction', {'groupId': _groupController.selectedGroupId.value});
+      final fetchedIncomeExpense =
+          await _commonApiService.getRequest('/transaction', {
+        "groupId": _groupController.selectedGroupId.value,
+        "startDate": startDate,
+        "endDate": endDate
+      });
 
       if (fetchedIncomeExpense != null) {
         final Map<String, dynamic> data = jsonDecode(fetchedIncomeExpense.body);
-
         totalIncome.value = data['_data']['income'] ?? 0;
         totalExpense.value = (data['_data']['expense'] as num).toInt();
       } else {

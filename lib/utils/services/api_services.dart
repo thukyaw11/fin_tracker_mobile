@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../helpers/logger.dart';
+
 class ApiService extends GetxService {
   Future<void> registerUser({
     required String name,
@@ -55,15 +57,12 @@ class ApiService extends GetxService {
       'email': email,
       'password': password,
     });
-
-    print(body);
-
     try {
       final response = await http.post(loginUrl, headers: headers, body: body);
-
+      Logger.superPrint(response.statusCode);
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-
+        Logger.superPrint(responseData);
         final token = responseData['_data']['token'];
         return token;
       } else {
