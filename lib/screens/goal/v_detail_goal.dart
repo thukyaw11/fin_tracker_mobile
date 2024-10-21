@@ -1,6 +1,9 @@
+import 'package:expense_tracker_mobile/controllers/goal/c_goal.dart';
+import 'package:expense_tracker_mobile/controllers/goal/m_add_saving_model.dart';
 import 'package:expense_tracker_mobile/controllers/goal/m_goal_model.dart';
 import 'package:expense_tracker_mobile/screens/add_new_transaction/widgets/x_text_field.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
+import 'package:expense_tracker_mobile/utils/helpers/extensions.dart';
 import 'package:expense_tracker_mobile/utils/helpers/x_success_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -12,8 +15,11 @@ import '../../utils/services/format_service.dart';
 class DetailGoal extends StatelessWidget {
   DetailGoal({super.key, required this.selectedGoal});
   final GoalModel selectedGoal;
-  final TextEditingController amountController = TextEditingController();
-  final TextEditingController dateController = TextEditingController();
+  final TextEditingController amountTEC = TextEditingController();
+  final TextEditingController dateTEC =
+      TextEditingController(); // this for displaying UI
+  DateTime selectedDate = DateTime(0); // this will be used for Api
+  final GoalController goalController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -187,34 +193,38 @@ class DetailGoal extends StatelessWidget {
               ),
             ),
             const Gap(50),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    showAddSavingBottomSheet(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    padding: const EdgeInsets.all(16),
-                    foregroundColor: AppColors.accentColor,
-                    backgroundColor: AppColors.primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'Add Saving',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: AppColors.accentColor,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ),
+            savingButton(context),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget savingButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: () {
+            showAddSavingBottomSheet(context);
+          },
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            padding: const EdgeInsets.all(16),
+            foregroundColor: AppColors.accentColor,
+            backgroundColor: AppColors.primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          child: const Text(
+            'Add Saving',
+            style: TextStyle(
+                fontSize: 18,
+                color: AppColors.accentColor,
+                fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
@@ -288,9 +298,10 @@ class DetailGoal extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      xSuccessDialog(
-                          'Transaction has been successfully removed', true);
+                    onPressed: () async {
+                      await goalController.deleteSelectedGoal(selectedGoal.id);
+                      await goalController.getGoals();
+                      Get.back(closeOverlays: true);
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
@@ -345,8 +356,7 @@ class DetailGoal extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                  height: 20), // Use SizedBox for gaps instead of Gap widget
+              20.heightBox(),
               const Text(
                 "Add Saving",
                 style: TextStyle(
@@ -354,13 +364,13 @@ class DetailGoal extends StatelessWidget {
                   fontSize: 18,
                 ),
               ),
-              const Gap(20),
+              20.heightBox(),
               XTextField(
                 placeHolder: 'Enter Amount',
                 suffixText: 'Ks',
-                controller: amountController,
+                controller: amountTEC,
               ),
-              const Gap(20),
+              20.heightBox(),
               GestureDetector(
                 onTap: () async {
                   DateTime? pickedDate = await showDatePicker(
@@ -370,15 +380,13 @@ class DetailGoal extends StatelessWidget {
                     lastDate: DateTime(2101),
                   );
                   if (pickedDate != null) {
-                    // Update the date controller with the selected date
-                    dateController.text = "${pickedDate.toLocal()}"
-                        .split(' ')[0]; // Format as needed
+                    dateTEC.text = "${pickedDate.toLocal()}".split(' ')[0];
+                    selectedDate = pickedDate;
                   }
                 },
                 child: AbsorbPointer(
-                  // Prevents text field from being editable
                   child: TextField(
-                    controller: dateController,
+                    controller: dateTEC,
                     decoration: const InputDecoration(
                       suffixIcon: Icon(Icons.calendar_today),
                       border: OutlineInputBorder(
@@ -390,12 +398,17 @@ class DetailGoal extends StatelessWidget {
                 ),
               ),
               const Gap(20),
-
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    showAddSavingBottomSheet(context);
+                  onPressed: () async {
+                    await goalController.addSaving(AddSavingModel(
+                        goalId: selectedGoal.id,
+                        savingAmount: int.tryParse(amountTEC.text) ?? 0,
+                        savingDateInISOString:
+                            "${selectedDate.toIso8601String()}Z"));
+                    await goalController.getGoals();
+                    Get.back(closeOverlays: true);
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,

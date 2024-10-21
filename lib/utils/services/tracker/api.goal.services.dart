@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:expense_tracker_mobile/controllers/goal/c_goal.dart';
 import 'package:expense_tracker_mobile/controllers/goal/m_add_goal_model.dart';
+import 'package:expense_tracker_mobile/controllers/goal/m_add_saving_model.dart';
 import 'package:expense_tracker_mobile/controllers/goal/m_goal_model.dart';
 import 'package:expense_tracker_mobile/models/m_group.dart';
 import 'package:expense_tracker_mobile/utils/helpers/logger.dart';
@@ -30,6 +31,50 @@ class GoalApiService extends GetxService {
           goalList.add(GoalModel.fromJson(json: r));
         }
         return goalList;
+      } else {
+        throw Exception('Failed to load income/expense');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> addSaving({required AddSavingModel savingModel}) async {
+    String? token = await SharedPreferenceService.getAccessToken();
+    final savingURL = Uri.parse(
+        '${ApiConstants.url}/goal/add-saving?goalId=${savingModel.goalId}&amount=${savingModel.savingAmount}&savingDate=${savingModel.savingDateInISOString}');
+    Logger.superPrint(savingURL);
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    try {
+      final response = await http.patch(savingURL, headers: headers);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final responseData = jsonDecode(response.body);
+        Logger.superPrint(responseData);
+      } else {
+        throw Exception('Failed to load income/expense');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> deleteGoal({required String goalId}) async {
+    String? token = await SharedPreferenceService.getAccessToken();
+    final goalUrl = Uri.parse('${ApiConstants.url}/goal/$goalId');
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    try {
+      final response = await http.delete(goalUrl, headers: headers);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final responseData = jsonDecode(response.body);
+        Logger.superPrint(responseData);
       } else {
         throw Exception('Failed to load income/expense');
       }
