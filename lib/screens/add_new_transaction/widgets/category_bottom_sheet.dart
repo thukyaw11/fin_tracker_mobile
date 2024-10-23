@@ -1,9 +1,9 @@
 import 'package:expense_tracker_mobile/controllers/category/c_category.dart';
 import 'package:expense_tracker_mobile/screens/add_new_transaction/c_add_new_transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 class CategoryBottomSheet {
   static final AddNewTransactionController addNewTransactionController =
@@ -55,7 +55,11 @@ class CategoryBottomSheet {
       return Column(
         children: [
           _buildCategoryItem(
-            icon: Iconsax.money5,
+            icon: Icon(
+              TablerIcons.all['user'],
+              size: 30,
+              color: Colors.red,
+            ),
             color: Colors.red,
             text: cate.name,
             onTap: () {
@@ -71,7 +75,7 @@ class CategoryBottomSheet {
 
   // Method to build a category item
   static Widget _buildCategoryItem({
-    required IconData icon,
+    required Icon icon,
     required Color color,
     required String text,
     required VoidCallback onTap,
@@ -88,7 +92,7 @@ class CategoryBottomSheet {
               color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Icon(icon, color: color, size: 30),
+            child: icon,
           ),
           const Gap(20),
           Text(

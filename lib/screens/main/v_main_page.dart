@@ -1,4 +1,5 @@
 import 'package:expense_tracker_mobile/controllers/navigation/c_navigation.dart';
+import 'package:expense_tracker_mobile/screens/alert/v_alert.dart';
 import 'package:expense_tracker_mobile/screens/goal/v_goal.dart';
 import 'package:expense_tracker_mobile/screens/home/v_home.dart';
 import 'package:expense_tracker_mobile/screens/profile/v_profile.dart';

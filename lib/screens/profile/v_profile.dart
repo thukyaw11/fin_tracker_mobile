@@ -1,3 +1,4 @@
+import 'package:expense_tracker_mobile/screens/alert/v_alert.dart';
 import 'package:expense_tracker_mobile/screens/onboarding/v_onboarding.dart';
 import 'package:expense_tracker_mobile/screens/profile/v_setting.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_constants.dart';
@@ -110,6 +111,54 @@ class ProfileScreen extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 18), // Made const for performance
                         ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const AlertScreen(),
+                        transition: AppConstants.pageTransition,
+                        duration: AppConstants.transitionDuration);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(
+                                  12), // Added const for better optimization
+                              decoration: BoxDecoration(
+                                color: Colors.blue.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(Icons.info_outline_rounded,
+                                  color: Colors.blue),
+                            ),
+                            const SizedBox(
+                                width: 10), // Spacing between icon and text
+                            const Text(
+                              "Alerts",
+                              style: TextStyle(
+                                  fontSize: 18), // Made const for performance
+                            ),
+                          ],
+                        ),
+                        Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.blue),
+                        )
                       ],
                     ),
                   ),

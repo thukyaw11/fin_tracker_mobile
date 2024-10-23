@@ -2,8 +2,9 @@ import 'package:expense_tracker_mobile/utils/helpers/logger.dart';
 
 class Wallet {
   final String id;
-  final String? imageUrl;
+  final String imageUrl;
   final String walletTitle;
+  final int walletAmount;
   final String walletDescription;
   final DateTime createdAt;
 
@@ -14,9 +15,10 @@ class Wallet {
 
   Wallet(
       {required this.id,
-      this.imageUrl,
+      required this.imageUrl,
       required this.walletTitle,
       required this.walletDescription,
+      required this.walletAmount,
       required this.createdAt});
 
   factory Wallet.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,7 @@ class Wallet {
         imageUrl: json['imageUrl'],
         walletTitle: json['walletTitle'],
         walletDescription: json['walletDescription'],
+        walletAmount: json['walletAmount'],
         createdAt: formattedDate);
   }
 

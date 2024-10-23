@@ -10,7 +10,7 @@ class HelpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBarWidget(title: "help"),
+      appBar: const CustomAppBarWidget(title: "Help"),
       body: Padding(
         padding:
             const EdgeInsets.symmetric(horizontal: AppConstants.pagePadding),

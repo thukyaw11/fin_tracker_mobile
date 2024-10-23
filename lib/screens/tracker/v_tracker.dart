@@ -160,10 +160,10 @@ class TrackerScreen extends StatelessWidget {
                           final wallet = _trackerController.wallets[index];
 
                           return BuildWalletCard(
-                            imageUrl:
+                            imageUrl: wallet.imageUrl ??
                                 "https://cloud.farytaxi.com/uploads/parenthand/7fd3f3a0-7c14-477a-9d8a-13594044539d.jpg", // Fetch image URL from the wallet data
                             payName: wallet.walletTitle,
-                            amount: 10000,
+                            amount: wallet.walletAmount,
                           );
                         },
                       );
