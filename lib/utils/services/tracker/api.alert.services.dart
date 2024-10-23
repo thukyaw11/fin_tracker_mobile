@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:expense_tracker_mobile/utils/constants/api_constants.dart';
 
 class AlertApiService extends GetxService {
-  Future<List<AlertModel>> getAllAlerts({required String type}) async {
+  Future<List<AlertModel>> getAllAlerts() async {
     String? token = await SharedPreferenceService.getAccessToken();
 
     final alertUrl = Uri.parse('${ApiConstants.url}/alert');

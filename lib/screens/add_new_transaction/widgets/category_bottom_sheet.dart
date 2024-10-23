@@ -56,7 +56,7 @@ class CategoryBottomSheet {
         children: [
           _buildCategoryItem(
             icon: Icon(
-              TablerIcons.all['user'],
+              TablerIcons.all[cate.icon],
               size: 30,
               color: Colors.red,
             ),
@@ -73,7 +73,6 @@ class CategoryBottomSheet {
     }).toList();
   }
 
-  // Method to build a category item
   static Widget _buildCategoryItem({
     required Icon icon,
     required Color color,

@@ -6,16 +6,15 @@ enum EnumAlertType { warning, info, noti }
 
 class AlertController extends GetxController {
   final AlertApiService apiService = Get.put(AlertApiService());
-  final RxList<AlertModel> goals = <AlertModel>[].obs;
+  final RxList<AlertModel> alerts = <AlertModel>[].obs;
 
-  // Future<void> getAlerts() async {
-  //   goals.value = await apiService.getAllGoals(
-  //       type: selectedType.value.name.toUpperCase());
-  // }
+  Future<void> getAlerts() async {
+    alerts.value = await apiService.getAllAlerts();
+  }
 
-  // @override
-  // void onInit() {
-  //   getAlerts();
-  //   super.onInit();
-  // }
+  @override
+  void onInit() {
+    getAlerts();
+    super.onInit();
+  }
 }
