@@ -55,7 +55,6 @@ class GroupBottomSheet {
 
   List<Widget> buildGroupItems() {
     return groupController.groups.map((group) {
-      Logger.superPrint(group);
       return Column(
         children: [
           _buildCategoryItem(

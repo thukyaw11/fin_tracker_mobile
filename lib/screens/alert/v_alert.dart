@@ -47,7 +47,6 @@ class AlertScreen extends StatelessWidget {
                                   color: Colors.blue),
                             ),
                             const SizedBox(width: 10),
-
                             Flexible(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +56,7 @@ class AlertScreen extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       const Text(
-                                        ,
+                                        "",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),

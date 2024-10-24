@@ -20,7 +20,6 @@ class CommonApiService extends GetxService {
         headers: _getHeaders(token),
         body: jsonEncode(payload),
       );
-      Logger.superPrint(response);
       return _processResponse(response);
     } catch (e) {
       print('POST request error: $e');

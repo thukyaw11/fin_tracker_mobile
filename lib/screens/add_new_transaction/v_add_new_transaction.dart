@@ -200,30 +200,37 @@ class AddNewTransaction extends StatelessWidget {
               const Gap(20),
               ImagePickerWidget(),
               const Gap(20),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    addNewTransactionController.addTransaction();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    padding: const EdgeInsets.all(16),
-                    foregroundColor: AppColors.accentColor,
-                    backgroundColor: AppColors.primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'Continue',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: AppColors.accentColor,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
+              Obx(() {
+                final AddNewTransactionController controller = Get.find();
+                return controller.xBusy.value
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            addNewTransactionController.addTransaction();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            padding: const EdgeInsets.all(16),
+                            foregroundColor: AppColors.accentColor,
+                            backgroundColor: AppColors.primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: const Text(
+                            'Continue',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: AppColors.accentColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      );
+              }),
             ],
           ),
         ),

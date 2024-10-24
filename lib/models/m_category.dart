@@ -11,7 +11,8 @@ class Category {
   }
 
   factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(id: json['id'], name: json['name'], icon: json['icon']);
+    return Category(
+        id: json['id'], name: json['name'], icon: json['icon'] ?? "");
   }
 
   static List<Category> fromJsonList(List<dynamic> jsonList) {
