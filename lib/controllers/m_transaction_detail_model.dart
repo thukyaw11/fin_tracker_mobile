@@ -9,9 +9,11 @@ class TransactionDetailModel {
   final bool isDeleted;
   final String cashCategory;
   final String walletTitle;
+  final String id;
 
   TransactionDetailModel(
       {required this.title,
+      required this.id,
       required this.cashCategory,
       required this.amount,
       required this.type,
@@ -22,6 +24,7 @@ class TransactionDetailModel {
 
   factory TransactionDetailModel.fromJson(Map<String, dynamic> json) {
     return TransactionDetailModel(
+        id: json["id"] ?? "",
         title: json["title"] ?? "",
         cashCategory: json["cashCategory"]["name"] ?? "",
         amount: json["amount"] ?? 0,

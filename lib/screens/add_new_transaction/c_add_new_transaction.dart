@@ -75,6 +75,8 @@ class AddNewTransactionController extends GetxController {
       if (returnImage.isNotEmpty) "transactionImageUrl": returnImage
     };
 
+    Logger.superPrint(returnImage, title: "image to send");
+
     try {
       final response = await apiService.postRequest('/transaction', payload);
       Logger.superPrint(response.toString());
@@ -109,7 +111,7 @@ class AddNewTransactionController extends GetxController {
       try {
         Response? response = await apiFormDataCall(data: payload);
         if (response?.statusCode == 200 || response?.statusCode == 201) {
-          returnImage = response?.body["_data"] ?? "";
+          tempImage = response?.body["_data"] ?? "";
           Logger.superPrint(returnImage);
         }
       } catch (e) {

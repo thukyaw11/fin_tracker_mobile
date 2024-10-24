@@ -41,6 +41,8 @@ class AddNewTransaction extends StatelessWidget {
                 controller: addNewTransactionController.amountController,
                 labelText: 'Your Amount',
                 placeHolder: 'Enter your amount',
+                keyboardType: TextInputType.number,
+                digitsOnly: true,
               ),
               const Gap(20),
               XTextField(

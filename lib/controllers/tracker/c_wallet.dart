@@ -1,5 +1,6 @@
+import 'package:expense_tracker_mobile/controllers/tracker/http_api_service.dart';
 import 'package:expense_tracker_mobile/models/m_wallet.dart';
-import 'package:expense_tracker_mobile/utils/helpers/logger.dart';
+import 'package:expense_tracker_mobile/screens/home/m_wallet_transaction_model.dart';
 import 'package:expense_tracker_mobile/utils/services/tracker/api.tracker.services.dart';
 import 'package:get/get.dart';
 
@@ -9,12 +10,28 @@ class TrackerController extends GetxController {
   final RxList<Wallet> wallets = RxList<Wallet>();
   var totalIncome = 0.obs;
   var totalExpense = 0.obs;
+  WalletTransactionModel? walletDetail;
+  RxBool xBusy = false.obs;
 
   @override
   void onInit() {
     fetchWallets();
     fetchTrackerMoney();
     super.onInit();
+  }
+
+  Future<void> fetchWalletTransactions({required String id}) async {
+    xBusy.value = true;
+    Response? response = await HttpApiService()
+        .apiGetCall(urlString: "https://finance.buclib.club/api/v1/wallet/$id");
+
+    if (response?.statusCode == 200 || response?.statusCode == 201) {
+      xBusy.value = false;
+      walletDetail = WalletTransactionModel.fromJson(
+          json: response?.body["_data"]["data"]);
+    } else {
+      xBusy.value = false;
+    }
   }
 
   Future<void> fetchWallets() async {

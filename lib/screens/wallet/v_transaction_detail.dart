@@ -11,6 +11,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/transaction/c_transaction.dart';
+
 // ignore: must_be_immutable
 class TransactionDetailsPage extends StatefulWidget {
   Color color;
@@ -66,7 +68,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
         ),
         body: Obx(() {
           TransactionDetailModel? selectedDetail = detailController.detailModel;
-          return detailController.xBusy.value && selectedDetail == null
+          return detailController.xBusy.value || selectedDetail == null
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
@@ -408,9 +410,22 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      await detailController.deleteSelectedDetails(
+                          id: detailController.detailModel?.id ?? "");
+                      final TransactionController transactionController =
+                          Get.find();
+                      await Future.wait([
+                        transactionController.fetchIncomeExpense(),
+                        transactionController.fetchTransactions(),
+                      ]);
+                      if (Get.isBottomSheetOpen!) {
+                        Get.back();
+                      }
                       xSuccessDialog(
                           'Transaction has been successfully removed', true);
+                      await Future.delayed(const Duration(milliseconds: 1000));
+                      Get.back(closeOverlays: true);
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,

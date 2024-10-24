@@ -236,7 +236,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ? Colors.green
                               : Colors.red,
                           formattedTime,
-                          transaction.id);
+                          transaction.id,
+                          false);
                     },
                   ),
                 );

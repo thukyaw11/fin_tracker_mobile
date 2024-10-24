@@ -6,20 +6,23 @@ import 'package:get/get.dart';
 class BuildWalletCard extends StatelessWidget {
   final String imageUrl;
   final String payName;
+  final String id;
   final int amount;
 
-  const BuildWalletCard({
-    super.key,
-    required this.imageUrl,
-    required this.payName,
-    required this.amount,
-  });
+  const BuildWalletCard(
+      {super.key,
+      required this.imageUrl,
+      required this.payName,
+      required this.amount,
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => const WalletDetail());
+        Get.to(() => WalletDetail(
+              id: id,
+            ));
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),

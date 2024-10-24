@@ -1,15 +1,29 @@
 import 'dart:convert';
+import 'package:expense_tracker_mobile/controllers/tracker/http_api_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:expense_tracker_mobile/controllers/m_transaction_detail_model.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../utils/helpers/logger.dart';
 import '../utils/services/storage_service.dart';
 
 class TransactionDetailController extends GetxController {
   TransactionDetailModel? detailModel;
   RxBool xBusy = false.obs;
+
+  Future<void> deleteSelectedDetails({required String id}) async {
+    try {
+      Response? response = await HttpApiService().apiDeleteCall(
+          urlString: 'https://finance.buclib.club/api/v1/transaction/$id');
+      Logger.superPrint(response?.body);
+      if (response?.statusCode == 204) {
+        Logger.superPrint("ssdfjdfkdjf");
+      }
+      xBusy.value = false;
+    } catch (e) {
+      Logger.superPrint(e);
+    }
+    xBusy.value = false;
+  }
 
   Future<void> getTransactionDetail({required String id}) async {
     xBusy.value = true;
