@@ -1,3 +1,4 @@
+import 'package:expense_tracker_mobile/controllers/profile/c_profile.dart';
 import 'package:expense_tracker_mobile/utils/constants/api_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -87,11 +88,18 @@ class ApiService extends GetxService {
     try {
       final responseData = await http.get(validateUrl, headers: headers);
       if (responseData.statusCode == 200) {
+        final ProfileController controller = Get.put(ProfileController());
+        String temp = responseData.body;
+        Map<String, dynamic> jsonObject = jsonDecode(temp);
+        controller.profile =
+            ProfileModel.fromJson(json: jsonObject["_data"]["me"]);
         return true;
       } else {
+        Logger.superPrint("error");
         return false;
       }
     } catch (e) {
+      Logger.superPrint("$e error");
       return false;
     }
   }

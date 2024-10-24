@@ -24,6 +24,25 @@ class HttpApiService {
     return responseConverter(response: response);
   }
 
+  Future<Response?> apiPatchCall(
+      {required String urlString, required Map body}) async {
+    http.Response? response;
+    String? token = await SharedPreferenceService.getAccessToken();
+    try {
+      response = await http
+          .patch(Uri.parse(urlString), body: jsonEncode(body), headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      });
+    } catch (e) {
+      Logger.superPrint(e);
+    }
+
+    return responseConverter(response: response);
+  }
+
   Future<Response?> apiDeleteCall({required String urlString}) async {
     http.Response? response;
     String? token = await SharedPreferenceService.getAccessToken();

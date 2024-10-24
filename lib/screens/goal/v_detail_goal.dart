@@ -65,43 +65,59 @@ class DetailGoal extends StatelessWidget {
             const Gap(30),
 
             // Centering the LinearPercentIndicator
-            LinearPercentIndicator(
-              width: Get.width,
-              lineHeight: 25.0,
-              percent: getPercentage(),
-              animation: true,
-              animationDuration: 2000,
-              center: Text(
-                "${(getPercentage() * 100).toStringAsFixed(1)} %",
-                style: const TextStyle(fontSize: 12.0, color: Colors.white),
+            Transform.scale(
+              scale: 0.95,
+              child: LinearPercentIndicator(
+                width: Get.width,
+                lineHeight: 30.0,
+                percent: getPercentage(),
+                animation: true,
+                animationDuration: 2000,
+                center: Text(
+                  "${(getPercentage() * 100).toStringAsFixed(1)} %",
+                  style: const TextStyle(fontSize: 12.0, color: Colors.white),
+                ),
+                barRadius: const Radius.circular(20),
+                backgroundColor: Colors.grey,
+                progressColor: selectedGoal.status == EnumGoalType.expired
+                    ? Colors.red
+                    : selectedGoal.status == EnumGoalType.achieved
+                        ? Colors.green
+                        : AppColors.primaryColor,
               ),
-              barRadius: const Radius.circular(20),
-              backgroundColor: Colors.grey,
-              progressColor: AppColors.primaryColor,
             ),
 
             const Gap(30),
-            Center(
-              child: Text.rich(
-                textAlign: TextAlign.center,
-                TextSpan(
-                  text: "You have ",
-                  style: const TextStyle(fontSize: 18, color: Colors.grey),
-                  children: [
-                    TextSpan(
-                      text: getLeftAmount(),
-                      style: const TextStyle(
-                        color: AppColors.primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const TextSpan(
-                      text: " left to  \n achieve goal!",
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            Visibility(
+                visible: !(selectedGoal.status == EnumGoalType.expired),
+                child: selectedGoal.status == EnumGoalType.ongoing
+                    ? Center(
+                        child: Text.rich(
+                          textAlign: TextAlign.center,
+                          TextSpan(
+                            text: "You have ",
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.grey),
+                            children: [
+                              TextSpan(
+                                text: getLeftAmount(),
+                                style: const TextStyle(
+                                  color: AppColors.primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: " left to  \n achieve goal!",
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : const Text(
+                        "Congratulations! 🥳",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.w600),
+                      )),
             const Gap(60),
 
             Padding(
@@ -193,7 +209,8 @@ class DetailGoal extends StatelessWidget {
               ),
             ),
             const Gap(50),
-            savingButton(context),
+            if (selectedGoal.status == EnumGoalType.ongoing)
+              savingButton(context),
           ],
         ),
       ),
@@ -449,6 +466,6 @@ class DetailGoal extends StatelessWidget {
       return 0;
     }
     double percentage = (selectedGoal.savedAmount / selectedGoal.amount);
-    return percentage;
+    return percentage >= 1 ? 1 : percentage;
   }
 }

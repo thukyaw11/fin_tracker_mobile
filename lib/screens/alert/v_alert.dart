@@ -5,6 +5,7 @@ import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../utils/constants/app_colors.dart';
 
@@ -55,13 +56,16 @@ class AlertScreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text(
-                                        "",
-                                        style: TextStyle(
+                                      Text(
+                                        controller.alerts[index].title,
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        "Tue 22, 18:50",
+                                        DateFormat('E d, HH:mm').format(
+                                            DateTime.tryParse(controller
+                                                    .alerts[index].createdAt) ??
+                                                DateTime.now()),
                                         style: TextStyle(
                                             fontSize: 10,
                                             color:
@@ -70,8 +74,8 @@ class AlertScreen extends StatelessWidget {
                                     ],
                                   ),
                                   const SizedBox(height: 5),
-                                  const Text(
-                                    "You have used most of your money in Shopping on September",
+                                  Text(
+                                    controller.alerts[index].content,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),
