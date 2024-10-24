@@ -8,6 +8,7 @@ import 'package:expense_tracker_mobile/screens/tracker/widgets/earning_text.dart
 import 'package:expense_tracker_mobile/screens/tracker/widgets/toggle_switch.dart';
 import 'package:expense_tracker_mobile/screens/tracker/widgets/wallet_card.dart';
 import 'package:expense_tracker_mobile/utils/constants/app_colors.dart';
+import 'package:expense_tracker_mobile/utils/helpers/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -95,6 +96,13 @@ class TrackerScreen extends StatelessWidget {
                         onChanged: (value) {
                           if (value != null) {
                             _groupController.selectedGroupName.value = value;
+                            _groupController.selectedGroupId.value =
+                                _groupController.groups
+                                    .where((e) => e.name == value)
+                                    .first
+                                    .id;
+                            _trackerController.fetchTrackerMoney();
+                            Logger.superPrint(_groupController.selectedGroupId);
                           }
                         },
                       );

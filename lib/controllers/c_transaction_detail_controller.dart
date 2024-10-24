@@ -31,7 +31,7 @@ class TransactionDetailController extends GetxController {
       Response? response = await apiGetCall(
           urlString:
               'https://finance.buclib.club/api/v1/transaction/detail/$id');
-      Logger.superPrint(response?.body);
+      Logger.superPrint(response?.body, title: id);
       if (response?.statusCode == 200 || response?.statusCode == 201) {
         detailModel = TransactionDetailModel.fromJson(response?.body["_data"]);
         xBusy.value = false;

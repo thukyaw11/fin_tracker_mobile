@@ -1,3 +1,4 @@
+import 'package:expense_tracker_mobile/controllers/group/c_group.dart';
 import 'package:expense_tracker_mobile/controllers/tracker/http_api_service.dart';
 import 'package:expense_tracker_mobile/models/m_wallet.dart';
 import 'package:expense_tracker_mobile/screens/home/m_wallet_transaction_model.dart';
@@ -43,9 +44,13 @@ class TrackerController extends GetxController {
   }
 
   Future<void> fetchTrackerMoney() async {
+    final GroupController groupController = Get.put(GroupController());
     try {
       final incomeExpense = await apiService.getIncomeExpense(
-          'INCOME', 'cafad70c-e285-44f0-bcd9-48effca3203b');
+          'INCOME',
+          groupController.selectedGroupId.value.isEmpty
+              ? 'cafad70c-e285-44f0-bcd9-48effca3203b'
+              : groupController.selectedGroupId.value);
 
       totalIncome.value = incomeExpense.income.toInt();
       totalExpense.value = incomeExpense.expense.toInt();
