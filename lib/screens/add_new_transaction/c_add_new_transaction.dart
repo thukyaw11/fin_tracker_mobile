@@ -86,7 +86,7 @@ class AddNewTransactionController extends GetxController {
         selectedCategory(SelectedCategory(name: '', id: ''));
         selectedWallet(SelectedWallet(name: '', id: ''));
         selectedGroup(SelectedGroup(name: '', id: ''));
-        Get.offAll(() => const HomePage());
+        Get.off(() => const HomePage());
         xBusy.value = false;
       } else {
         Logger.superPrint("error");

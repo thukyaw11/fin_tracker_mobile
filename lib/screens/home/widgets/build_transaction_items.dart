@@ -2,12 +2,11 @@ import 'package:expense_tracker_mobile/screens/wallet/v_transaction_detail.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 Widget buildTransactionItem(String title, String amount, String subtitle,
-    IconData icon, Color iconColor, String time) {
+    IconData icon, Color iconColor, String time, String id) {
   return GestureDetector(
     onTap: () {
-      Get.to(TransactionDetailsPage(color: Colors.green,));
+      Get.to(TransactionDetailsPage(color: Colors.green, id: id));
     },
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),

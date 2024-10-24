@@ -228,15 +228,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           DateFormat('h:mm a').format(adjustedTime);
 
                       return buildTransactionItem(
-                        transaction.cashCategory.name,
-                        '${transaction.type == 'INCOME' ? '+' : '-'} ${formatNumber(transaction.amount).toString()} ks',
-                        transaction.title,
-                        Icons.wallet,
-                        transaction.type == "INCOME"
-                            ? Colors.green
-                            : Colors.red,
-                        formattedTime,
-                      );
+                          transaction.cashCategory.name,
+                          '${transaction.type == 'INCOME' ? '+' : '-'} ${formatNumber(transaction.amount).toString()} ks',
+                          transaction.title,
+                          Icons.wallet,
+                          transaction.type == "INCOME"
+                              ? Colors.green
+                              : Colors.red,
+                          formattedTime,
+                          transaction.id);
                     },
                   ),
                 );

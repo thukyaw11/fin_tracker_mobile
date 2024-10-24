@@ -48,8 +48,8 @@ class WalletDetail extends StatelessWidget {
                     );
                   }
                 },
-                errorBuilder:
-                    (BuildContext context, Object error, StackTrace? stackTrace) {
+                errorBuilder: (BuildContext context, Object error,
+                    StackTrace? stackTrace) {
                   return const Center(child: Icon(Icons.error));
                 },
               ),
@@ -78,14 +78,8 @@ class WalletDetail extends StatelessWidget {
                   // String formattedTime =
                   //     DateFormat('h:mm a').format(adjustedTime);
 
-                  return buildTransactionItem(
-                    "Shopping",
-                    "+ 30,000 Ks",
-                    "Mont",
-                    Icons.wallet,
-                    Colors.green,
-                    "2:00 pm",
-                  );
+                  return buildTransactionItem("Shopping", "+ 30,000 Ks", "Mont",
+                      Icons.wallet, Colors.green, "2:00 pm", "");
                 },
               ),
             )
