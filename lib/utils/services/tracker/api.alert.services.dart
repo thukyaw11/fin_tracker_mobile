@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:expense_tracker_mobile/controllers/alert/m_alert_model.dart';
+import 'package:expense_tracker_mobile/utils/helpers/logger.dart';
 import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -20,9 +21,11 @@ class AlertApiService extends GetxService {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        List<dynamic> alertsJson = responseData['_data']['data'];
+        List<dynamic> alertsJson = responseData['_data'];
         List<AlertModel> alertList = [];
         for (var r in alertsJson) {
+          Logger.superPrint(r);
+
           alertList.add(AlertModel.fromJson(json: r));
         }
         return alertList;

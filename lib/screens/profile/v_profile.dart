@@ -118,7 +118,7 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(height: 15),
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => const AlertScreen(),
+                    Get.to(() => AlertScreen(),
                         transition: AppConstants.pageTransition,
                         duration: AppConstants.transitionDuration);
                   },

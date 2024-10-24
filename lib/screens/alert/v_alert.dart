@@ -1,13 +1,10 @@
 import 'package:expense_tracker_mobile/controllers/alert/c_alert.dart';
 import 'package:expense_tracker_mobile/screens/onboarding/v_onboarding.dart';
-import 'package:expense_tracker_mobile/screens/profile/v_setting.dart';
 import 'package:expense_tracker_mobile/screens/profile/w_app_bar_widget.dart';
-import 'package:expense_tracker_mobile/utils/constants/app_constants.dart';
 import 'package:expense_tracker_mobile/utils/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 import '../../utils/constants/app_colors.dart';
 
@@ -23,79 +20,72 @@ class AlertScreen extends StatelessWidget {
   }
 
   Widget alerts() {
-    return Expanded(
-      child: Obx(() {
-        return controller.alerts.isEmpty
-            ? const Center(child: Text("No Alerts Yet!"))
-            : RefreshIndicator(
-                onRefresh: () async {
-                  await controller.getAlerts();
-                },
-                child: ListView.builder(
-                    itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        elevation: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 20),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  color: Colors.blue.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
-                                child: const Icon(Icons.info_rounded,
-                                    color: Colors.blue),
+    return Obx(() {
+      return controller.alerts.isEmpty
+          ? const Center(child: Text("No Alerts Yet!"))
+          : RefreshIndicator(
+              onRefresh: () async {
+                await controller.getAlerts();
+              },
+              child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      elevation: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.blue.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(100),
                               ),
-                              const SizedBox(
-                                  width:
-                                      10), // Add some space between the icon and the text
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment
-                                      .start, // Align text to the start
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Text(
-                                          "Usage Warning!",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight
-                                                  .bold), // Optional styling
-                                        ),
-                                        Text(
-                                          "Tue 22, 18:50",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black.withOpacity(
-                                                  0.5)), // Optional styling
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                        height: 5), // Add spacing between texts
-                                    const Text(
-                                      "You have used most of your money in Shopping on September",
-                                      maxLines:
-                                          2, // Limit the number of lineoverflow: TextOverflow
-                                      // Handle overflow with ellipsis
-                                    ),
-                                  ],
-                                ),
+                              child: const Icon(Icons.info_rounded,
+                                  color: Colors.blue),
+                            ),
+                            const SizedBox(width: 10),
+
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        ,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        "Tue 22, 18:50",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color:
+                                                Colors.black.withOpacity(0.5)),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 5),
+                                  const Text(
+                                    "You have used most of your money in Shopping on September",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                    itemCount: 50));
-      }),
-    );
+                      ),
+                    );
+                  },
+                  itemCount: controller.alerts.length));
+    });
   }
 
   void showLogoutConfirmSheet() {
