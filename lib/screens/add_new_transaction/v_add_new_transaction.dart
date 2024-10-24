@@ -204,35 +204,39 @@ class AddNewTransaction extends StatelessWidget {
               const Gap(20),
               Obx(() {
                 final AddNewTransactionController controller = Get.find();
-                return controller.xBusy.value
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            addNewTransactionController.addTransaction();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            padding: const EdgeInsets.all(16),
-                            foregroundColor: AppColors.accentColor,
-                            backgroundColor: AppColors.primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: const Text(
-                            'Continue',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: AppColors.accentColor,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      );
+                return Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      controller.xBusy.value
+                          ? null
+                          : addNewTransactionController.addTransaction();
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      height: 60,
+                      width: controller.xBusy.value ? 60 : Get.width,
+                      decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(
+                              controller.xBusy.value ? 10000 : 10)),
+                      child: Center(
+                        child: controller.xBusy.value
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : Text(
+                                "Continue",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    color: Colors.white),
+                              ),
+                      ),
+                    ),
+                  ),
+                );
               }),
+              const Gap(30),
             ],
           ),
         ),

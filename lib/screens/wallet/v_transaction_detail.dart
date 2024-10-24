@@ -308,29 +308,29 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                                 ],
                               ),
                             const Gap(23),
-                            GestureDetector(
-                              onTap: () {
-                                // Get.to(() => const VerificationPage());
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: AppColors.primaryColor,
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 13, horizontal: 0),
-                                child: const Text(
-                                  textAlign: TextAlign.center,
-                                  "Edit",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     // Get.to(() => const VerificationPage());
+                            //   },
+                            //   child: Container(
+                            //     width: double.infinity,
+                            //     decoration: BoxDecoration(
+                            //       color: AppColors.primaryColor,
+                            //       borderRadius: BorderRadius.circular(15),
+                            //     ),
+                            //     padding: const EdgeInsets.symmetric(
+                            //         vertical: 13, horizontal: 0),
+                            //     child: const Text(
+                            //       textAlign: TextAlign.center,
+                            //       "Edit",
+                            //       style: TextStyle(
+                            //         fontSize: 18,
+                            //         color: Colors.white,
+                            //         fontWeight: FontWeight.w400,
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       )
