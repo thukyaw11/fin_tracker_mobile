@@ -53,6 +53,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   url_launcher:
   flutter_tabler_icons:
+  flutter_launcher_icons: ^0.14.1
 
 
 
