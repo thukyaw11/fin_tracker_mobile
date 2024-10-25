@@ -7,10 +7,21 @@ import 'package:intl/intl.dart';
 import '../../controllers/goal/c_add_goal.dart';
 import '../../utils/constants/app_colors.dart';
 
-class AddNewGoal extends StatelessWidget {
-  final AddGoalController controller = Get.put(AddGoalController());
-
+class AddNewGoal extends StatefulWidget {
   AddNewGoal({super.key});
+
+  @override
+  State<AddNewGoal> createState() => _AddNewGoalState();
+}
+
+class _AddNewGoalState extends State<AddNewGoal> {
+  @override
+  void initState() {
+    controller.setToDefault();
+    super.initState();
+  }
+
+  final AddGoalController controller = Get.put(AddGoalController());
   final TextEditingController dateController = TextEditingController();
 
   @override

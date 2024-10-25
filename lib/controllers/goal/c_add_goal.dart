@@ -13,6 +13,14 @@ class AddGoalController extends GetxController {
 
   RxBool xBusy = false.obs;
 
+  void setToDefault() {
+    xBusy.value = false;
+    titleTEC.clear();
+    goalAmountTEC.clear();
+    savedAmountTEC.clear();
+    deadlineTEC.clear();
+  }
+
   Future<void> addNewGoal() async {
     checkConditions(onSuccess: () async {
       DateTime dateTime = DateFormat("MMM dd, yyyy").parse(deadlineTEC.text);

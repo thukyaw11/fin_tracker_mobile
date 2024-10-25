@@ -151,16 +151,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 final totalIncome = _transactionController.totalIncome.value;
                 final expenseAmount = _transactionController.totalExpense.value;
 
-                final netPercentage =
-                    totalIncome > 0 ? (netAmount / totalIncome) * 100 : 0;
-                final expensePercentage =
-                    totalIncome > 0 ? (expenseAmount / totalIncome) * 100 : 0;
+                final netPercentage = (totalIncome > 0 && netAmount > 0)
+                    ? ((netAmount / totalIncome) * 100).clamp(1, 100)
+                    : 0;
+                final expensePercentage = totalIncome > 0
+                    ? (expenseAmount / totalIncome * 100).clamp(1, 100)
+                    : 0;
+
+                Logger.superPrint(netPercentage,
+                    title: "expense $expensePercentage");
+
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     buildIncomeExpenseCard(
                       'Net Amount',
-                      '${formatNumber(_transactionController.totalIncome.value - _transactionController.totalExpense.value)} Ks',
+                      '${formatNumber(netAmount)} Ks',
                       Colors.green,
                       '${netPercentage.toStringAsFixed(0)} %',
                       netPercentage / 100,
@@ -168,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(width: 16),
                     buildIncomeExpenseCard(
                       'Expenses',
-                      '${formatNumber(_transactionController.totalExpense.value)} Ks',
+                      '${formatNumber(expenseAmount)} Ks',
                       Colors.red,
                       '${expensePercentage.toStringAsFixed(0)} %',
                       expensePercentage / 100,

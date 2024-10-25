@@ -27,7 +27,9 @@ class LoginController extends GetxController {
 
       if (token != null) {
         await SharedPreferenceService.saveAccessToken(token);
-
+        nameController.clear();
+        passwordController.clear();
+        emailController.clear();
         Get.off(() => const HomePage());
       } else {
         Get.snackbar(

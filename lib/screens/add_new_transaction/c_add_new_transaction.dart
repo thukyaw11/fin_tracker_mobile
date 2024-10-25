@@ -34,6 +34,19 @@ class AddNewTransactionController extends GetxController {
   final ImagePickerController imagePickerController =
       Get.put(ImagePickerController());
 
+  void setToDefault() {
+    amountController.clear();
+    descriptionController.clear();
+    titleController.clear();
+    imagePickerController.selectedImage.value = null;
+    xBusy.value = false;
+    returnImage = "";
+    selectedType.value = TransactionType.INCOME;
+    selectedCategory.value = SelectedCategory(name: '', id: '');
+    selectedWallet.value = SelectedWallet(name: '', id: '');
+    selectedGroup.value = SelectedGroup(name: '', id: '');
+  }
+
   Future<void> addTransaction() async {
     String amount = amountController.text.trim();
     String description = descriptionController.text.trim();

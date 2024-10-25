@@ -27,6 +27,10 @@ class RegisterController extends GetxController {
       password: password,
     );
 
+    nameController.clear();
+    emailController.clear();
+    passwordController.clear();
+
     Get.to(() => LoginScreen());
   }
 }

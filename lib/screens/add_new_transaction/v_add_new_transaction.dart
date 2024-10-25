@@ -12,8 +12,19 @@ import 'package:get/get.dart';
 
 import '../../utils/constants/app_colors.dart';
 
-class AddNewTransaction extends StatelessWidget {
+class AddNewTransaction extends StatefulWidget {
   AddNewTransaction({super.key});
+
+  @override
+  State<AddNewTransaction> createState() => _AddNewTransactionState();
+}
+
+class _AddNewTransactionState extends State<AddNewTransaction> {
+  @override
+  void initState() {
+    addNewTransactionController.setToDefault();
+    super.initState();
+  }
 
   final AddNewTransactionController addNewTransactionController =
       Get.put(AddNewTransactionController());
@@ -224,7 +235,7 @@ class AddNewTransaction extends StatelessWidget {
                             ? const CircularProgressIndicator(
                                 color: Colors.white,
                               )
-                            : Text(
+                            : const Text(
                                 "Continue",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
