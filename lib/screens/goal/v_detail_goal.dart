@@ -347,7 +347,7 @@ class DetailGoal extends StatelessWidget {
   void showAddSavingBottomSheet(BuildContext context) {
     Get.bottomSheet(
       Container(
-        height: MediaQuery.of(context).size.height * 0.4,
+        height: 280,
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -387,33 +387,33 @@ class DetailGoal extends StatelessWidget {
                 suffixText: 'Ks',
                 controller: amountTEC,
               ),
-              20.heightBox(),
-              GestureDetector(
-                onTap: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2101),
-                  );
-                  if (pickedDate != null) {
-                    dateTEC.text = "${pickedDate.toLocal()}".split(' ')[0];
-                    selectedDate = pickedDate;
-                  }
-                },
-                child: AbsorbPointer(
-                  child: TextField(
-                    controller: dateTEC,
-                    decoration: const InputDecoration(
-                      suffixIcon: Icon(Icons.calendar_today),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      ),
-                      labelText: 'Select Date',
-                    ),
-                  ),
-                ),
-              ),
+              // 20.heightBox(),
+              // GestureDetector(
+              //   onTap: () async {
+              //     DateTime? pickedDate = await showDatePicker(
+              //       context: context,
+              //       initialDate: DateTime.now(),
+              //       firstDate: DateTime(2000),
+              //       lastDate: DateTime(2101),
+              //     );
+              //     if (pickedDate != null) {
+              //       dateTEC.text = "${pickedDate.toLocal()}".split(' ')[0];
+              //       selectedDate = pickedDate;
+              //     }
+              //   },
+              //   child: AbsorbPointer(
+              //     child: TextField(
+              //       controller: dateTEC,
+              //       decoration: const InputDecoration(
+              //         suffixIcon: Icon(Icons.calendar_today),
+              //         border: OutlineInputBorder(
+              //           borderRadius: BorderRadius.all(Radius.circular(12.0)),
+              //         ),
+              //         labelText: 'Select Date',
+              //       ),
+              //     ),
+              //   ),
+              // ),
               const Gap(20),
               SizedBox(
                 width: double.infinity,

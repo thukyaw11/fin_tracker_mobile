@@ -21,7 +21,7 @@ class CategoryBottomSheet {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           children: [
             const Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -38,7 +38,7 @@ class CategoryBottomSheet {
             const SizedBox(height: 20),
             ListView(
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               children: buildCategoryItems(),
             ),
           ],

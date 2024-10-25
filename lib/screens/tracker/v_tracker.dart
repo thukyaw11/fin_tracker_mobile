@@ -166,7 +166,6 @@ class TrackerScreen extends StatelessWidget {
                         itemCount: _trackerController.wallets.length,
                         itemBuilder: (context, index) {
                           final wallet = _trackerController.wallets[index];
-
                           return BuildWalletCard(
                             id: wallet.id,
                             imageUrl: wallet.imageUrl ??

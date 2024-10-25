@@ -2,11 +2,23 @@ import 'package:expense_tracker_mobile/screens/wallet/v_transaction_detail.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget buildTransactionItem(String title, String amount, String subtitle,
-    IconData icon, Color iconColor, String time, String id, bool xFromWallet) {
+Widget buildTransactionItem(
+    String title,
+    String amount,
+    String subtitle,
+    IconData icon,
+    Color iconColor,
+    String time,
+    String id,
+    bool xFromWallet,
+    String walletId) {
   return GestureDetector(
     onTap: () {
-      Get.to(TransactionDetailsPage(color: Colors.green, id: id));
+      Get.to(TransactionDetailsPage(
+        color: Colors.green,
+        id: id,
+        walletId: walletId,
+      ));
     },
     child: ColoredBox(
       color: Colors.transparent,

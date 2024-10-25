@@ -149,17 +149,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     _transactionController.totalExpense.value;
 
                 final totalIncome = _transactionController.totalIncome.value;
+
                 final expenseAmount = _transactionController.totalExpense.value;
 
-                final netPercentage = (totalIncome > 0 && netAmount > 0)
-                    ? ((netAmount / totalIncome) * 100).clamp(1, 100)
-                    : 0;
-                final expensePercentage = totalIncome > 0
-                    ? (expenseAmount / totalIncome * 100).clamp(1, 100)
-                    : 0;
+                bool xAllExpense = totalIncome <= 0 && expenseAmount > 0;
 
-                Logger.superPrint(netPercentage,
-                    title: "expense $expensePercentage");
+                final netPercentage = xAllExpense
+                    ? 0
+                    : (totalIncome > 0 && netAmount > 0)
+                        ? ((netAmount / totalIncome) * 100).clamp(0, 100)
+                        : 0;
+                final expensePercentage = xAllExpense
+                    ? 100
+                    : totalIncome > 0
+                        ? (expenseAmount / totalIncome * 100).clamp(0, 100)
+                        : 0;
 
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -243,7 +247,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               : Colors.red,
                           formattedTime,
                           transaction.id,
-                          false);
+                          false,
+                          "");
                     },
                   ),
                 );

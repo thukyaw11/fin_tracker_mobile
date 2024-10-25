@@ -11,13 +11,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/tracker/c_wallet.dart';
 import '../../controllers/transaction/c_transaction.dart';
+import '../../utils/helpers/logger.dart';
 
 // ignore: must_be_immutable
 class TransactionDetailsPage extends StatefulWidget {
   Color color;
-  TransactionDetailsPage({super.key, required this.color, required this.id});
+  TransactionDetailsPage(
+      {super.key, required this.color, required this.id, this.walletId = ""});
   final String id;
+  final String walletId;
 
   @override
   State<TransactionDetailsPage> createState() => _TransactionDetailsPageState();
@@ -411,14 +415,22 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
+                      final TrackerController trackerController = Get.find();
                       await detailController.deleteSelectedDetails(
                           id: detailController.detailModel?.id ?? "");
                       final TransactionController transactionController =
                           Get.find();
-                      await Future.wait([
-                        transactionController.fetchIncomeExpense(),
-                        transactionController.fetchTransactions(),
-                      ]);
+                      try {
+                        await Future.wait([
+                          transactionController.fetchIncomeExpense(),
+                          transactionController.fetchTransactions(),
+                          trackerController.fetchWalletTransactions(
+                              id: widget.walletId),
+                          trackerController.fetchWallets()
+                        ]);
+                      } catch (e) {
+                        Logger.superPrint(e);
+                      }
                       if (Get.isBottomSheetOpen!) {
                         Get.back();
                       }

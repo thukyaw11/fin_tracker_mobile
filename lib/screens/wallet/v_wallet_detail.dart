@@ -8,7 +8,7 @@ import '../../controllers/tracker/c_wallet.dart';
 
 class WalletDetail extends StatefulWidget {
   const WalletDetail({super.key, required this.id});
-  final String id;
+  final String id; // this the id i need
 
   @override
   State<WalletDetail> createState() => _WalletDetailState();
@@ -86,7 +86,7 @@ class _WalletDetailState extends State<WalletDetail> {
                     Center(
                       child: Text(
                         model!.walletTitle,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 24),
                       ),
                     ),
@@ -94,7 +94,7 @@ class _WalletDetailState extends State<WalletDetail> {
                     Center(
                       child: Text(
                         "${FormatService.numberFormat.format(model!.amount)} Ks",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 30),
                       ),
                     ),
@@ -121,7 +121,8 @@ class _WalletDetailState extends State<WalletDetail> {
                                   DateTime.tryParse(eachItem.createdAt) ??
                                       DateTime.now()),
                               eachItem.id,
-                              true);
+                              true,
+                              widget.id);
                         },
                       ),
                     )
