@@ -47,7 +47,7 @@ class HelpPage extends StatelessWidget {
   }
 
   void onClickContact() async {
-    const telegramUrl = "https://t.me/s0m3b0dy_3ls3";
+    const telegramUrl = "https://t.me/LiTTy_duMb_xD";
     final Uri url = Uri.parse(telegramUrl);
     await launchUrl(url, mode: LaunchMode.externalApplication);
   }

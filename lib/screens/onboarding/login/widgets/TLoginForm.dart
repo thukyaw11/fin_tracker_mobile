@@ -97,31 +97,31 @@ class TLoginForm extends StatelessWidget {
               height: TSizes.spaceBtwInputField / 2,
             ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                //Remember Me
-                Row(
-                  children: [
-                    Checkbox(
-                      value: true,
-                      onChanged: (value) {},
-                      checkColor: Colors.white,
-                      activeColor: AppColors.primaryColor,
-                    ),
-                    const Text(TTexts.rememberMe),
-                  ],
-                ),
-
-                //Forget Password
-                TextButton(
-                    onPressed: () => {},
-                    child: const Text(
-                      TTexts.forgetPassword,
-                      style: TextStyle(color: AppColors.primaryColor),
-                    )),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     //Remember Me
+            //     Row(
+            //       children: [
+            //         Checkbox(
+            //           value: true,
+            //           onChanged: (value) {},
+            //           checkColor: Colors.white,
+            //           activeColor: AppColors.primaryColor,
+            //         ),
+            //         const Text(TTexts.rememberMe),
+            //       ],
+            //     ),
+            //
+            //     //Forget Password
+            //     TextButton(
+            //         onPressed: () => {},
+            //         child: const Text(
+            //           TTexts.forgetPassword,
+            //           style: TextStyle(color: AppColors.primaryColor),
+            //         )),
+            //   ],
+            // ),
             const SizedBox(
               height: 16.0,
             ),
