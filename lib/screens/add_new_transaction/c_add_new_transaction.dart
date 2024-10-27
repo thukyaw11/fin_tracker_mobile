@@ -35,16 +35,20 @@ class AddNewTransactionController extends GetxController {
       Get.put(ImagePickerController());
 
   void setToDefault() {
-    amountController.clear();
-    descriptionController.clear();
-    titleController.clear();
-    imagePickerController.selectedImage.value = null;
-    xBusy.value = false;
-    returnImage = "";
-    selectedType.value = TransactionType.INCOME;
-    selectedCategory.value = SelectedCategory(name: '', id: '');
-    selectedWallet.value = SelectedWallet(name: '', id: '');
-    selectedGroup.value = SelectedGroup(name: '', id: '');
+    try {
+      amountController.clear();
+      descriptionController.clear();
+      titleController.clear();
+      imagePickerController.selectedImage.value = null;
+      xBusy.value = false;
+      returnImage = "";
+      selectedType.value = TransactionType.INCOME;
+      selectedCategory.value = SelectedCategory(name: '', id: '');
+      selectedWallet.value = SelectedWallet(name: '', id: '');
+      selectedGroup.value = SelectedGroup(name: '', id: '');
+    } catch (e) {
+      Logger.superPrint(e);
+    }
   }
 
   Future<void> addTransaction() async {
@@ -95,12 +99,7 @@ class AddNewTransactionController extends GetxController {
       Logger.superPrint(response.toString());
       if (response?.statusCode == 201 || response?.statusCode == 200) {
         Get.snackbar("Success", "Transaction added successfully!");
-        amountController.clear();
-        descriptionController.clear();
-        titleController.clear();
-        selectedCategory(SelectedCategory(name: '', id: ''));
-        selectedWallet(SelectedWallet(name: '', id: ''));
-        selectedGroup(SelectedGroup(name: '', id: ''));
+        setToDefault();
         Get.off(() => const HomePage());
         xBusy.value = false;
       } else {
