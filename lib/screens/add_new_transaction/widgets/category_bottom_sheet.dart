@@ -21,7 +21,7 @@ class CategoryBottomSheet {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min, // Use max size to expand the height
           children: [
             const Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -38,7 +38,7 @@ class CategoryBottomSheet {
             const SizedBox(height: 20),
             ListView(
               shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               children: buildCategoryItems(),
             ),
           ],
@@ -46,6 +46,7 @@ class CategoryBottomSheet {
       ),
       isDismissible: true,
       enableDrag: true,
+      isScrollControlled: true,
       backgroundColor: Colors.transparent,
     );
   }
